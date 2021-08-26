@@ -29,33 +29,33 @@
 
 <body class="bkg-img">
 
-<div class="content fc-row ju-center dbg-border--red">
-  <div class="fc-col max-w700 ma-t50 ma-b50 dbg-border--blue">
+<div class="content fc-row ju-center">
+  <div class="fc-col max-w700 ma-t50 ma-b50">
 
     <!--
     ########## Title ##########
     -->
-    <div class="fc-col ju-center h100">
+    <div class="fc-col ju-center ma-t50 ma-b50">
       <div class="fc-row ju-center">
-        <span class="title dbg-border--blue">Your Travel Planner</span>
+        <span class="title">Your Travel Planner</span>
       </div>
     </div>
 
     <!--
     ########## Input section ##########
     -->
-    <div class="fc-col ju-center ma-b40 dbg-border--red">
+    <div class="fc-col ju-center ma-b50">
       <div class="fc-row">
         <div class="fi-grow-2 fc-col">
-        <span class="error ma-r20">Unfortunately, I don’t know this place.<br>
-          Please choose another location.</span>
-          <span class="ma-r20">Where you want to go?</span>
+          <span class="error">Unfortunately, I don’t know this place.
+            Please choose another location.</span>
+          <input type="text" class="input" placeholder="Where you want to go?">
         </div>
         <div class="fi-grow-2 fc-col ju-end">
-          <span class="ma-r20">When?</span>
+          <input type="date" class="input" placeholder="When?">
         </div>
         <div class="fi-grow-1 fc-col ju-end">
-          <span>Let's go</span>
+          <input type="submit" class="submit" value="Let's go!">
         </div>
       </div>
     </div>
@@ -67,139 +67,141 @@
       <div class="fc-row">
 
         <!-- Data section -->
-        <div class="fc-col fi-grow-1">
+        <div class="fc-col fi-grow-1 data_panel">
 
           <!-- First row: location and time -->
           <div class="fc-row">
             <div class="fi-grow-1 fc-col ju-end">
-              <span>Erfurt, Germany</span>
+              <p class="pad20">
+                <span class="city">Erfurt, </span><span class="country">Germany</span>
+              </p>
             </div>
-            <div class="fc-col">
+            <div class="fc-col pad20">
               <div class="fc-row ju-end">
-                <span>23:35</span>
+                <span class="time">23:35</span>
               </div>
               <div class="fc-row ju-end">
-                <span>Local time</span>
+                <span class="tz">Local time</span>
               </div>
             </div>
           </div>
 
           <!-- Second row: icon, temperature, other values -->
-          <div class="fc-row">
+          <div class="fc-row ma-b30">
+            <div class="fi-grow-1 fc-col ju-center">
+              <div class="fc-row pad20">
+                <i class="wi wi-day-cloudy wi-xx-large icon"></i>
+              </div>
+            </div>
             <div class="fi-grow-1 fc-col ju-center">
               <div class="fc-row">
-                <span>icon</span>
+                <span class="temp ma-r20">23&deg;C</span>
               </div>
             </div>
-            <div class="fi-grow-1 fc-col ju-center">
-              <div class="fc-row ju-end">
-                <span class="ma-r20">temp</span>
-              </div>
-            </div>
-            <div class="fi-grow-3 fc-col ju-center">
+            <div class="fi-grow-3 fc-col ju-center border-l">
               <div class="fc-col ma-l20">
-                <span class="value">humidity : </span>
-                <span class="value">wind : </span>
-                <span class="value">pressure : </span>
-                <span class="value">value a : </span>
-                <span class="value">value b : </span>
-                <span class="value">value c : </span>
-                <span class="value">value d : </span>
+                <p class="value"><span>humidity : </span><span>65%</span></p>
+                <p class="value"><span>wind : </span><span>23 km/h</span></p>
+                <p class="value"><span>pressure : </span><span>1014 hPA</span></p>
+                <p class="value"><span>value a : </span><span>12 u</span></p>
+                <p class="value"><span>value b : </span><span>12 u</span></p>
+                <p class="value"><span>value c : </span><span>12 u</span></p>
+                <p class="value"><span>value d : </span><span>12 u</span></p>
               </div>
             </div>
           </div>
 
           <!-- Third row: forecast -->
-          <div class="fc-row dbg-border--blue dbg-border-space">
+          <div class="fc-row forecast_panel">
 
             <!-- One day forecast -->
             <div class="fi-grow-1 fc-col">
               <div class="fc-row ju-center">
-                <span>Mon</span>
+                <span class="forc-text">Mon</span>
               </div>
               <div class="fc-row ju-center">
-                <span>icon</span>
+                <i class="wi wi-day-cloudy forc-icons"></i>
               </div>
               <div class="fc-row ju-center">
-                <span>13&deg; - 18&deg;</span>
+                <span class="forc-text">13&deg; - 18&deg;</span>
               </div>
             </div>
 
             <!-- One day forecast -->
             <div class="fi-grow-1 fc-col">
-              <div class="fc-row ju-center">
-                <span>Tue</span>
+              <div class="fc-row ju-center border-l">
+                <span class="forc-text">Tue</span>
               </div>
               <div class="fc-row ju-center">
-                <span>icon</span>
+                <i class="wi wi-day-sunny forc-icons"></i>
               </div>
               <div class="fc-row ju-center">
-                <span>13&deg; - 18&deg;</span>
-              </div>
-            </div>
-
-            <!-- One day forecast -->
-            <div class="fi-grow-1 fc-col">
-              <div class="fc-row ju-center">
-                <span>Wed</span>
-              </div>
-              <div class="fc-row ju-center">
-                <span>icon</span>
-              </div>
-              <div class="fc-row ju-center">
-                <span>13&deg; - 18&deg;</span>
+                <span class="forc-text">13&deg; - 18&deg;</span>
               </div>
             </div>
 
             <!-- One day forecast -->
             <div class="fi-grow-1 fc-col">
-              <div class="fc-row ju-center">
-                <span>Thu</span>
+              <div class="fc-row ju-center border-l">
+                <span class="forc-text">Wed</span>
               </div>
               <div class="fc-row ju-center">
-                <span>icon</span>
+                <i class="wi wi-snow forc-icons"></i>
               </div>
               <div class="fc-row ju-center">
-                <span>13&deg; - 18&deg;</span>
-              </div>
-            </div>
-
-            <!-- One day forecast -->
-            <div class="fi-grow-1 fc-col">
-              <div class="fc-row ju-center">
-                <span>Fri</span>
-              </div>
-              <div class="fc-row ju-center">
-                <span>icon</span>
-              </div>
-              <div class="fc-row ju-center">
-                <span>13&deg; - 18&deg;</span>
+                <span class="forc-text">13&deg; - 18&deg;</span>
               </div>
             </div>
 
             <!-- One day forecast -->
             <div class="fi-grow-1 fc-col">
-              <div class="fc-row ju-center">
-                <span>Sat</span>
+              <div class="fc-row ju-center border-l">
+                <span class="forc-text">Thu</span>
               </div>
               <div class="fc-row ju-center">
-                <span>icon</span>
+                <i class="wi wi-rain forc-icons"></i>
               </div>
               <div class="fc-row ju-center">
-                <span>13&deg; - 18&deg;</span>
+                <span class="forc-text">13&deg; - 18&deg;</span>
               </div>
             </div>
 
             <!-- One day forecast -->
             <div class="fi-grow-1 fc-col">
-              <div class="fc-row ju-center">
-                <span>Sun</span>
+              <div class="fc-row ju-center border-l">
+                <span class="forc-text">Fri</span>
               </div>
               <div class="fc-row ju-center">
-                <span>icon</span>
+                <i class="wi wi-cloud forc-icons"></i>
               </div>
               <div class="fc-row ju-center">
-                <span>13&deg; - 18&deg;</span>
+                <span class="forc-text">13&deg; - 18&deg;</span>
+              </div>
+            </div>
+
+            <!-- One day forecast -->
+            <div class="fi-grow-1 fc-col">
+              <div class="fc-row ju-center border-l">
+                <span class="forc-text">Sat</span>
+              </div>
+              <div class="fc-row ju-center">
+                <i class="wi wi-lightning forc-icons"></i>
+              </div>
+              <div class="fc-row ju-center">
+                <span class="forc-text">13&deg; - 18&deg;</span>
+              </div>
+            </div>
+
+            <!-- One day forecast -->
+            <div class="fi-grow-1 fc-col">
+              <div class="fc-row ju-center border-l">
+                <span class="forc-text">Sun</span>
+              </div>
+              <div class="fc-row ju-center">
+                <i class="wi wi-day-fog forc-icons"></i>
+              </div>
+              <div class="fc-row ju-center">
+                <span class="forc-text">13&deg; - 18&deg;</span>
               </div>
             </div>
 
