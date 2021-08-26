@@ -10,18 +10,215 @@
         content="Travel planner web app project for Udacity Front End Web
           Developer Nanodegree Program.">
 
+  <!--  Google fonts: https://fonts.google.com/-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Work+Sans:wght@100;200;300;400&display=swap"
+    rel="stylesheet">
+
+  <!-- Weather icons: http://erikflowers.github.io/weather-icons -->
   <link href="../styles/weather-icons.min.css" rel="stylesheet">
+
+  <!-- My styles -->
+  <link href="../styles/resets.css" rel="stylesheet">
   <link href="../styles/main.css" rel="stylesheet">
+  <link href="../styles/colors.css" rel="stylesheet">
 
 </head>
 
-<body>
+<body class="bkg-img">
 
-<div class="header">
-  <h1>Your Travel Planner</h1>
-  <i class="wi wi-day-cloudy wi-xx-large"></i>
-  <p>hello</p>
+<div class="content fc-row ju-center dbg-border--red">
+  <div class="fc-col max-w700 ma-t50 ma-b50 dbg-border--blue">
+
+    <!--
+    ########## Title ##########
+    -->
+    <div class="fc-col ju-center h100">
+      <div class="fc-row ju-center">
+        <span class="title dbg-border--blue">Your Travel Planner</span>
+      </div>
+    </div>
+
+    <!--
+    ########## Input section ##########
+    -->
+    <div class="fc-col ju-center ma-b40 dbg-border--red">
+      <div class="fc-row">
+        <div class="fi-grow-2 fc-col">
+        <span class="error ma-r20">Unfortunately, I don’t know this place.<br>
+          Please choose another location.</span>
+          <span class="ma-r20">Where you want to go?</span>
+        </div>
+        <div class="fi-grow-2 fc-col ju-end">
+          <span class="ma-r20">When?</span>
+        </div>
+        <div class="fi-grow-1 fc-col ju-end">
+          <span>Let's go</span>
+        </div>
+      </div>
+    </div>
+
+    <!--
+    ########## Data and image sections ##########
+    -->
+    <div class="fc-col ju-center">
+      <div class="fc-row">
+
+        <!-- Data section -->
+        <div class="fc-col fi-grow-1">
+
+          <!-- First row: location and time -->
+          <div class="fc-row">
+            <div class="fi-grow-1 fc-col ju-end">
+              <span>Erfurt, Germany</span>
+            </div>
+            <div class="fc-col">
+              <div class="fc-row ju-end">
+                <span>23:35</span>
+              </div>
+              <div class="fc-row ju-end">
+                <span>Local time</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Second row: icon, temperature, other values -->
+          <div class="fc-row">
+            <div class="fi-grow-1 fc-col ju-center">
+              <div class="fc-row">
+                <span>icon</span>
+              </div>
+            </div>
+            <div class="fi-grow-1 fc-col ju-center">
+              <div class="fc-row ju-end">
+                <span class="ma-r20">temp</span>
+              </div>
+            </div>
+            <div class="fi-grow-3 fc-col ju-center">
+              <div class="fc-col ma-l20">
+                <span class="value">humidity : </span>
+                <span class="value">wind : </span>
+                <span class="value">pressure : </span>
+                <span class="value">value a : </span>
+                <span class="value">value b : </span>
+                <span class="value">value c : </span>
+                <span class="value">value d : </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Third row: forecast -->
+          <div class="fc-row dbg-border--blue dbg-border-space">
+
+            <!-- One day forecast -->
+            <div class="fi-grow-1 fc-col">
+              <div class="fc-row ju-center">
+                <span>Mon</span>
+              </div>
+              <div class="fc-row ju-center">
+                <span>icon</span>
+              </div>
+              <div class="fc-row ju-center">
+                <span>13&deg; - 18&deg;</span>
+              </div>
+            </div>
+
+            <!-- One day forecast -->
+            <div class="fi-grow-1 fc-col">
+              <div class="fc-row ju-center">
+                <span>Tue</span>
+              </div>
+              <div class="fc-row ju-center">
+                <span>icon</span>
+              </div>
+              <div class="fc-row ju-center">
+                <span>13&deg; - 18&deg;</span>
+              </div>
+            </div>
+
+            <!-- One day forecast -->
+            <div class="fi-grow-1 fc-col">
+              <div class="fc-row ju-center">
+                <span>Wed</span>
+              </div>
+              <div class="fc-row ju-center">
+                <span>icon</span>
+              </div>
+              <div class="fc-row ju-center">
+                <span>13&deg; - 18&deg;</span>
+              </div>
+            </div>
+
+            <!-- One day forecast -->
+            <div class="fi-grow-1 fc-col">
+              <div class="fc-row ju-center">
+                <span>Thu</span>
+              </div>
+              <div class="fc-row ju-center">
+                <span>icon</span>
+              </div>
+              <div class="fc-row ju-center">
+                <span>13&deg; - 18&deg;</span>
+              </div>
+            </div>
+
+            <!-- One day forecast -->
+            <div class="fi-grow-1 fc-col">
+              <div class="fc-row ju-center">
+                <span>Fri</span>
+              </div>
+              <div class="fc-row ju-center">
+                <span>icon</span>
+              </div>
+              <div class="fc-row ju-center">
+                <span>13&deg; - 18&deg;</span>
+              </div>
+            </div>
+
+            <!-- One day forecast -->
+            <div class="fi-grow-1 fc-col">
+              <div class="fc-row ju-center">
+                <span>Sat</span>
+              </div>
+              <div class="fc-row ju-center">
+                <span>icon</span>
+              </div>
+              <div class="fc-row ju-center">
+                <span>13&deg; - 18&deg;</span>
+              </div>
+            </div>
+
+            <!-- One day forecast -->
+            <div class="fi-grow-1 fc-col">
+              <div class="fc-row ju-center">
+                <span>Sun</span>
+              </div>
+              <div class="fc-row ju-center">
+                <span>icon</span>
+              </div>
+              <div class="fc-row ju-center">
+                <span>13&deg; - 18&deg;</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Image section -->
+        <div class="fc-row fi-grow-1 dbg-border--red dbg-border-space">
+          <span>Image section</span>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!--  <i class="wi wi-day-cloudy wi-xx-large"></i>-->
+  </div>
 </div>
+
 
 </body>
 

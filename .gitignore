@@ -7,3 +7,4 @@ dist
 .idea
 src/server/.env
 coverage
+~$*

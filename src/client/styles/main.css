@@ -1,8 +1,132 @@
-.bg-black {
-  background: black;
-  color: white;
+.fc-col {
+  display: flex;
+  flex-direction: column;
 }
 
-.wi-xx-large {
-  font-size: xx-large;
+.fc-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.fi-grow-3 {
+  flex-grow: 3;
+}
+
+.fi-grow-2 {
+  flex-grow: 2;
+}
+
+.fi-grow-1 {
+  flex-grow: 1;
+}
+
+.ju-start {
+  justify-content: flex-start;
+}
+
+.ju-center {
+  justify-content: center;
+}
+
+.ju-end {
+  justify-content: flex-end;
+}
+
+.ma-r20 {
+  margin-right: 20px;
+}
+
+.ma-l20 {
+  margin-left: 20px;
+}
+
+.ma-t50 {
+  margin-top: 50px;
+}
+
+.ma-b40 {
+  margin-bottom: 40px;
+}
+
+.ma-b50 {
+  margin-bottom: 50px;
+}
+
+.max-w700 {
+  max-width: 700px;
+}
+
+.h100 {
+  height: 100px
+}
+
+.bkg-img {
+  position: relative;
+}
+
+.bkg-img:before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("../img/compass-2946959.jpg");
+  background-size: cover;
+  opacity: 0.15;
+}
+
+.content {
+  position: relative;
+}
+
+.title {
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 300;
+  font-size: 44pt;
+}
+
+.error {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14pt;
+  color: var(--carnelian);
+  margin: 10px 0 10px 0;
+}
+
+.value {
+  line-height: 1.3em;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+.red {
+  background: orangered;
+}
+
+.green {
+  background: yellowgreen;
+}
+
+.blue {
+  background: steelblue;
+}
+
+.dbg-border--red {
+  border: red 1px solid;
+}
+
+.dbg-border--blue {
+  border: blue 1px solid;
+}
+
+.dbg-border--green {
+  border: green 1px solid;
+}
+
+.dbg-border-space {
+  padding: 1px;
+  margin: 1px;
 }
