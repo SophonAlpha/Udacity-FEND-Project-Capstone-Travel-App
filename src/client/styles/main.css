@@ -32,8 +32,16 @@
   justify-content: flex-end;
 }
 
+.ma-r10 {
+  margin-right: 10px;
+}
+
 .ma-r20 {
   margin-right: 20px;
+}
+
+.ma-l10 {
+  margin-left: 10px;
 }
 
 .ma-l20 {
@@ -97,6 +105,7 @@
   font-family: 'Work Sans', sans-serif;
   font-weight: 300;
   font-size: 44pt;
+  text-align: center;
 }
 
 .error {
@@ -104,6 +113,18 @@
   font-size: 11pt;
   color: var(--carnelian);
   margin: 10px 20px 10px 10px;
+}
+
+.input_container {
+  display: flex;
+  flex-direction: row;
+}
+
+@media screen and (max-width: 650px) {
+  .input_container {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .input {
@@ -117,6 +138,13 @@
   border-bottom: 3px solid var(--cambridge-blue);
   padding: 10px;
   margin-right: 20px;
+}
+
+@media screen and (max-width: 650px) {
+  .input {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
 }
 
 .input:focus {
@@ -150,11 +178,50 @@
   background-color: var(--olive-drab-7);
 }
 
-.data_panel {
+.info-container {
+  display: flex;
+  flex-direction: row;
+}
+
+@media screen and (max-width: 650px) {
+  .info-container {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.values-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-left: white 1px solid;
+}
+
+@media screen and (max-width: 470px) {
+  .values-container {
+    display: none;
+  }
+}
+
+.image-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+}
+
+@media screen and (max-width: 650px) {
+  .image-container {
+    display: flex;
+    flex-direction: row;
+    height: 400px;
+  }
+}
+
+.bkg-col-midnight-green-eagle-green {
   background-color: var(--midnight-green-eagle-green);
 }
 
-.forecast_panel {
+.bkg-col-olive-drab-7 {
   background-color: var(--olive-drab-7);
 }
 
@@ -214,6 +281,24 @@
   padding: 8px;
 }
 
+@media screen and (max-width: 470px) {
+  .temp-range {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .temp-single {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 470px) {
+  .temp-single {
+    display: none;
+  }
+}
+
 .forc-icons {
   color: white;
   padding: 5px;
@@ -249,6 +334,10 @@
 
 .hidden {
   opacity: 0;
+}
+
+.removed {
+  display: none;
 }
 
 .red {

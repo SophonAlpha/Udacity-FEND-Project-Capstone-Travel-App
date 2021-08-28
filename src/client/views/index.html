@@ -30,14 +30,14 @@
 <body class="bkg-img">
 
 <div class="content fc-row ju-center">
-  <div class="fc-col max-w900">
+  <div class="fc-col max-w900 ma-l10 ma-r10">
 
     <!--
     ########## Title ##########
     -->
     <div class="fc-col ma-t100 ma-b50">
       <div class="fc-row ju-center">
-        <span class="title">Your Travel Planner</span>
+        <p class="title">Your Travel Planner</p>
       </div>
     </div>
 
@@ -45,16 +45,19 @@
     ########## Input section ##########
     -->
     <div class="fc-col ma-b50">
-      <div class="fc-row">
+      <div class="input_container">
+        <!-- Error message -->
         <div class="fi-grow-2 fc-col">
-          <span class="error">Unfortunately, I don’t know this place.
-            Please choose another location.</span>
+          <p class="error">Unfortunately, I don’t know this place.
+            Please choose another location.</p>
           <input type="text" class="input" placeholder="Where you want to go?">
         </div>
+        <!-- Input location -->
         <div class="fi-grow-2 fc-col ju-end">
           <input type="date" class="input" placeholder="When?"
                  min="2021-08-26">
         </div>
+        <!-- Input date -->
         <div class="fi-grow-1 fc-col ju-end">
           <input type="submit" class="submit" value="Let's go!">
         </div>
@@ -65,10 +68,10 @@
     ########## Data and image sections ##########
     -->
     <div class="fc-col ma-b150">
-      <div class="fc-row">
+      <div class="info-container">
 
         <!-- Data section -->
-        <div class="fc-col data_panel">
+        <div class="fc-col bkg-col-midnight-green-eagle-green">
 
           <!-- First row: location and time -->
           <div class="fc-row">
@@ -99,7 +102,7 @@
                 <span class="temp ma-r20">23&deg;C</span>
               </div>
             </div>
-            <div class="fi-grow-3 fc-col ju-center border-l">
+            <div class="fi-grow-3 values-container">
               <div class="fc-col ma-l20">
                 <p class="value"><span>humidity : </span><span>65%</span></p>
                 <p class="value"><span>wind : </span><span>23 km/h</span></p>
@@ -113,7 +116,7 @@
           </div>
 
           <!-- Third row: forecast -->
-          <div class="fc-row forecast_panel">
+          <div class="fc-row bkg-col-olive-drab-7">
 
             <!-- One day forecast -->
             <div class="fi-grow-1 fc-col">
@@ -124,7 +127,10 @@
                 <i class="wi wi-day-cloudy forc-icons"></i>
               </div>
               <div class="fc-row ju-center">
-                <span class="forc-text">13&deg; - 18&deg;</span>
+                <span class="forc-text">
+                  <span class="temp-range">13&deg; - 18&deg;</span>
+                  <span class="temp-single">15&deg;</span>
+                </span>
               </div>
             </div>
 
@@ -137,7 +143,10 @@
                 <i class="wi wi-day-sunny forc-icons"></i>
               </div>
               <div class="fc-row ju-center">
-                <span class="forc-text">13&deg; - 18&deg;</span>
+                <span class="forc-text">
+                  <span class="temp-range">13&deg; - 18&deg;</span>
+                  <span class="temp-single">15&deg;</span>
+                </span>
               </div>
             </div>
 
@@ -150,7 +159,10 @@
                 <i class="wi wi-snow forc-icons"></i>
               </div>
               <div class="fc-row ju-center">
-                <span class="forc-text">13&deg; - 18&deg;</span>
+                <span class="forc-text">
+                  <span class="temp-range">13&deg; - 18&deg;</span>
+                  <span class="temp-single">15&deg;</span>
+                </span>
               </div>
             </div>
 
@@ -163,7 +175,10 @@
                 <i class="wi wi-rain forc-icons"></i>
               </div>
               <div class="fc-row ju-center">
-                <span class="forc-text">13&deg; - 18&deg;</span>
+                <span class="forc-text">
+                  <span class="temp-range">13&deg; - 18&deg;</span>
+                  <span class="temp-single">15&deg;</span>
+                </span>
               </div>
             </div>
 
@@ -176,7 +191,10 @@
                 <i class="wi wi-cloud forc-icons"></i>
               </div>
               <div class="fc-row ju-center">
-                <span class="forc-text">13&deg; - 18&deg;</span>
+                <span class="forc-text">
+                  <span class="temp-range">13&deg; - 18&deg;</span>
+                  <span class="temp-single">15&deg;</span>
+                </span>
               </div>
             </div>
 
@@ -189,7 +207,10 @@
                 <i class="wi wi-lightning forc-icons"></i>
               </div>
               <div class="fc-row ju-center">
-                <span class="forc-text">13&deg; - 18&deg;</span>
+                <span class="forc-text">
+                  <span class="temp-range">13&deg; - 18&deg;</span>
+                  <span class="temp-single">15&deg;</span>
+                </span>
               </div>
             </div>
 
@@ -202,7 +223,10 @@
                 <i class="wi wi-day-fog forc-icons"></i>
               </div>
               <div class="fc-row ju-center">
-                <span class="forc-text">13&deg; - 18&deg;</span>
+                <span class="forc-text">
+                  <span class="temp-range">13&deg; - 18&deg;</span>
+                  <span class="temp-single">15&deg;</span>
+                </span>
               </div>
             </div>
 
@@ -210,7 +234,7 @@
         </div>
 
         <!-- Image section -->
-        <div class="fi-grow-1 fc-row">
+        <div class="image-container">
           <div class="fi-grow-1 img-box fc-col">
             <div class="fc-row ju-end">
               <div class="fc-col">
