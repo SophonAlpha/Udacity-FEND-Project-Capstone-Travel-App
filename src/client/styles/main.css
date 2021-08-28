@@ -44,6 +44,10 @@
   margin-top: 50px;
 }
 
+.ma-t100 {
+  margin-top: 100px;
+}
+
 .ma-b30 {
   margin-bottom: 30px;
 }
@@ -52,12 +56,20 @@
   margin-bottom: 50px;
 }
 
+.ma-b100 {
+  margin-bottom: 100px;
+}
+
+.ma-b150 {
+  margin-bottom: 150px;
+}
+
 .pad20 {
   padding: 20px;
 }
 
-.max-w700 {
-  max-width: 700px;
+.max-w900 {
+  max-width: 900px;
 }
 
 .bkg-img {
@@ -205,6 +217,30 @@
 .forc-icons {
   color: white;
   padding: 5px;
+}
+
+.img-box {
+  background-image: url("../img/dom-4575515_1920.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.img-desc {
+  font-family: 'Work Sans', sans-serif;
+  background-color: white;
+  opacity: 0.6;
+  font-size: 11pt;
+  color: black;
+  padding: 8px 8px 6px 8px;
+}
+
+.img-credit {
+  font-family: 'Work Sans', sans-serif;
+  background-color: white;
+  opacity: 0.6;
+  font-size: 8pt;
+  color: black;
+  padding: 0px 8px 8px 8px;
 }
 
 .border-l {

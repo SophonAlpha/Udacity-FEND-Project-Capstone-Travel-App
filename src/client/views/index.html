@@ -30,12 +30,12 @@
 <body class="bkg-img">
 
 <div class="content fc-row ju-center">
-  <div class="fc-col max-w700 ma-t50 ma-b50">
+  <div class="fc-col max-w900">
 
     <!--
     ########## Title ##########
     -->
-    <div class="fc-col ju-center ma-t50 ma-b50">
+    <div class="fc-col ma-t100 ma-b50">
       <div class="fc-row ju-center">
         <span class="title">Your Travel Planner</span>
       </div>
@@ -44,7 +44,7 @@
     <!--
     ########## Input section ##########
     -->
-    <div class="fc-col ju-center ma-b50">
+    <div class="fc-col ma-b50">
       <div class="fc-row">
         <div class="fi-grow-2 fc-col">
           <span class="error">Unfortunately, I don’t know this place.
@@ -52,7 +52,8 @@
           <input type="text" class="input" placeholder="Where you want to go?">
         </div>
         <div class="fi-grow-2 fc-col ju-end">
-          <input type="date" class="input" placeholder="When?">
+          <input type="date" class="input" placeholder="When?"
+                 min="2021-08-26">
         </div>
         <div class="fi-grow-1 fc-col ju-end">
           <input type="submit" class="submit" value="Let's go!">
@@ -63,11 +64,11 @@
     <!--
     ########## Data and image sections ##########
     -->
-    <div class="fc-col ju-center">
+    <div class="fc-col ma-b150">
       <div class="fc-row">
 
         <!-- Data section -->
-        <div class="fc-col fi-grow-1 data_panel">
+        <div class="fc-col data_panel">
 
           <!-- First row: location and time -->
           <div class="fc-row">
@@ -209,15 +210,24 @@
         </div>
 
         <!-- Image section -->
-        <div class="fc-row fi-grow-1 dbg-border--red dbg-border-space">
-          <span>Image section</span>
+        <div class="fi-grow-1 fc-row">
+          <div class="fi-grow-1 img-box fc-col">
+            <div class="fc-row ju-end">
+              <div class="fc-col">
+                <p class="img-desc">description</p>
+                <p class="img-credit">Image by <a
+                  href="https://pixabay.com/users/analogicus-8164369/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4575515">analogicus</a>
+                  from <a
+                    href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4575515">Pixabay</a>
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>
     </div>
 
-
-    <!--  <i class="wi wi-day-cloudy wi-xx-large"></i>-->
   </div>
 </div>
 
