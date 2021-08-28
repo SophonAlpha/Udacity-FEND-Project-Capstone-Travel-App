@@ -1,0 +1,70 @@
+{
+  "name": "udacity-fend-project-natural-language-processing",
+  "sideEffects": [
+    "*.scss"
+  ],
+  "version": "1.0.0",
+  "description": "*Udacity Front End Web Developer Nanodegree Program*",
+  "private": true,
+  "main": "dist/bundle.js",
+  "scripts": {
+    "build-dev": "webpack --config webpack.dev.js",
+    "node-dev": "concurrently \"webpack --config webpack.dev.js\" \"sleepms 3000 && nodemon ./src/server/server.js\" \"sleepms 5000 && opener http://localhost:3000\"",
+    "start-dev": "webpack serve --config webpack.dev.js --open",
+    "start": "node ./src/server/server.js",
+    "test": "jest",
+    "test-coverage": "jest --coverage",
+    "build-prod": "webpack --config webpack.prod.js",
+    "node-prod": "concurrently \"webpack --config webpack.prod.js\" \"sleepms 3000 && node ./src/server/server.js\" \"sleepms 5000 && opener http://localhost:3000\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SophonAlpha/Udacity-FEND-Project-Natural-Language-Processing.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SophonAlpha/Udacity-FEND-Project-Natural-Language-Processing/issues"
+  },
+  "homepage": "https://github.com/SophonAlpha/Udacity-FEND-Project-Natural-Language-Processing#readme",
+  "devDependencies": {
+    "@babel/core": "^7.15.0",
+    "@babel/preset-env": "^7.15.0",
+    "babel-loader": "^8.2.2",
+    "concurrently": "^6.2.1",
+    "copy-webpack-plugin": "^9.0.1",
+    "css-loader": "^6.2.0",
+    "eslint": "^7.32.0",
+    "html-webpack-plugin": "^5.3.2",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^27.0.6",
+    "jest-fetch-mock": "^3.0.3",
+    "jsdom": "^17.0.0",
+    "mini-css-extract-plugin": "^2.2.0",
+    "node-sass": "^6.0.1",
+    "nodemon": "^2.0.12",
+    "opener": "^1.5.2",
+    "regenerator-runtime": "^0.13.9",
+    "sass-loader": "^12.1.0",
+    "sleep-ms": "^2.0.1",
+    "standard": "^16.0.3",
+    "style-loader": "^3.2.1",
+    "supertest": "^6.1.5",
+    "webpack": "^5.49.0",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2",
+    "webpack-merge": "^5.8.0",
+    "workbox-webpack-plugin": "^6.2.4"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "form-data": "^4.0.0",
+    "html-to-text": "^8.0.0",
+    "node-fetch": "^2.6.1"
+  }
+}
