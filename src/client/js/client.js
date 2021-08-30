@@ -30,8 +30,16 @@ function locationTextChanged () {
     })
 }
 
-function updateLocationSuggestions(jsonData) {
-  // tba
+function updateLocationSuggestions (jsonData) {
+  // console.log(jsonData)
+  const newOptions = []
+  jsonData.forEach((elem) => {
+    const option = document.createElement('option')
+    option.value = `${elem.name}, ${elem.adminName1}, ${elem.countryName}`
+    newOptions.push(option)
+  })
+  console.log(newOptions)
+  document.getElementById('suggestions').replaceChildren(newOptions)
 }
 
 // Register a service worker

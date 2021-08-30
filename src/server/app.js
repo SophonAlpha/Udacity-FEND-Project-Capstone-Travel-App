@@ -30,9 +30,8 @@ app.get('/', function (request, response) {
 })
 
 app.get('/qLocation', function (request, response) {
-  console.log('/query-location request received')
-  getGeoNames(request.query.location, function (text) {
-    response.status(200).send(JSON.stringify({ text: text }))
+  getGeoNames(request.query.location, function (jsonData) {
+    response.status(200).send(JSON.stringify(jsonData))
   })
 })
 
@@ -48,15 +47,26 @@ function getGeoNames (location, callback) {
       ['featureClass', 'A'],
     ]
   ).toString()
-  console.log(url.href)
-  // axios.get(url)
-  //   .then(response => {
-  //     const text = convert(response.data)
-  //     callback(text)
-  //   })
-  //   .catch(error => {
-  //     console.error(error)
-  //   })
+  axios.get(url.href)
+    .then(response => {
+      const suggestions = []
+      response.data.geonames.forEach((elem) => {
+        suggestions.push(
+          {
+            lng: elem.lng,
+            lat: elem.lat,
+            name: elem.name,
+            adminName1: elem.adminName1,
+            countryName: elem.countryName,
+            countryCode: elem.countryCode
+          }
+        )
+      })
+      callback(suggestions)
+    })
+    .catch(error => {
+      console.error(error)
+    })
 }
 
 module.exports = app
