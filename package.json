@@ -1,5 +1,5 @@
 {
-  "name": "udacity-fend-project-natural-language-processing",
+  "name": "Udacity Capstone Project - Travel Planning App",
   "sideEffects": [
     "*.scss"
   ],
@@ -19,15 +19,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SophonAlpha/Udacity-FEND-Project-Natural-Language-Processing.git"
+    "url": "git+https://github.com/SophonAlpha/Udacity-FEND-Project-Capstone-Travel-App.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/SophonAlpha/Udacity-FEND-Project-Natural-Language-Processing/issues"
+    "url": "https://github.com/SophonAlpha/Udacity-FEND-Project-Capstone-Travel-App/issues"
   },
-  "homepage": "https://github.com/SophonAlpha/Udacity-FEND-Project-Natural-Language-Processing#readme",
+  "homepage": "https://github.com/SophonAlpha/Udacity-FEND-Project-Capstone-Travel-App#readme",
   "devDependencies": {
     "@babel/core": "^7.15.0",
     "@babel/preset-env": "^7.15.0",

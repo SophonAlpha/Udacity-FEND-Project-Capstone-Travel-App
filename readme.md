@@ -24,3 +24,4 @@ development.
   https://secure.geonames.org/search?name=Erfurt&maxRows=100&username=<USER ID>&type=json
   &featureClass=P&featureClass=A
 - Pixabay API
+- [Icons8](https://icons8.com/)
