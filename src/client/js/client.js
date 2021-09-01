@@ -6,6 +6,7 @@ import fetch from 'node-fetch'
 
 let inputTimeOutId
 const inputTimeOut = 100
+let locationOptions = {}
 
 // listen to changes in the location input element
 document.getElementById('location').addEventListener('input', function (event) {
@@ -37,9 +38,38 @@ function updateLocationSuggestions (jsonData) {
     const option = document.createElement('option')
     option.value = `${elem.name}, ${elem.adminName1}, ${elem.countryName}`
     newOptions.push(option)
+    locationOptions[option.value] = elem
   })
-  console.log(newOptions)
-  document.getElementById('suggestions').replaceChildren(newOptions)
+  document.getElementById('suggestions').replaceChildren(...newOptions)
+}
+
+// click on submit button
+document.getElementById('submit').addEventListener('click', function (event) {
+  // console.log(locationOptions[document.getElementById('location').value])
+  let location = {}
+  if (locationOptions.hasOwnProperty(document.getElementById('location').value)) {
+    location = locationOptions[document.getElementById('location').value]
+    console.log(location)
+  } else {
+    getLocationData()
+      .then(location => {
+        console.log(location)
+      })
+  }
+})
+
+function getLocationData () {
+  const qStr = {
+    location: document.getElementById('location').value
+  }
+  return fetch('/qLocation?' + new URLSearchParams(qStr))
+    .then(response => response.json())
+    .then(jsonData => {
+      return jsonData[0]
+    })
+    .catch((err) => {
+      console.error(err)
+    })
 }
 
 // Register a service worker
