@@ -6,7 +6,7 @@ import fetch from 'node-fetch'
 
 let inputTimeOutId
 const inputTimeOut = 100
-let locationOptions = {}
+const locationOptions = {}
 
 // listen to changes in the location input element
 document.getElementById('location').addEventListener('input', function (event) {
@@ -49,11 +49,11 @@ document.getElementById('submit').addEventListener('click', function (event) {
   let location = {}
   if (locationOptions.hasOwnProperty(document.getElementById('location').value)) {
     location = locationOptions[document.getElementById('location').value]
-    console.log(location)
+    getWeatherData(location)
   } else {
     getLocationData()
       .then(location => {
-        console.log(location)
+        getWeatherData(location)
       })
   }
 })
@@ -70,6 +70,31 @@ function getLocationData () {
     .catch((err) => {
       console.error(err)
     })
+}
+
+function getWeatherData (location) {
+  const qStr = {
+    lat: location.lat,
+    lon: location.lng
+  }
+  return fetch('/qWeatherCurrent?' + new URLSearchParams(qStr))
+    .then(response => response.json())
+    .then(currentWeather => {
+      updateCurrentWeather(location, currentWeather)
+    })
+    .catch((err) => {
+      console.error(err)
+    })
+}
+
+function updateCurrentWeather (location, currentWeather) {
+  document.getElementById('city').innerText = `${location.name}, `
+  document.getElementById('country').innerText = `${location.countryName}`
+  document.getElementById('temp').innerText = `${currentWeather.data[0].app_temp}`
+  console.log('Location data:')
+  console.log(location)
+  console.log('Weather data:')
+  console.log(currentWeather)
 }
 
 // Register a service worker

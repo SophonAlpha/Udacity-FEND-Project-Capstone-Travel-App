@@ -9,6 +9,7 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
+    clean: true,
     library: {
       name: 'client',
       type: 'umd',
@@ -36,7 +37,10 @@ module.exports = {
       favicon: './src/client/img/favicon.ico'
     }),
     new MiniCssExtractPlugin(),
-    new WorkboxPlugin.GenerateSW(),
+    new WorkboxPlugin.GenerateSW({
+      exclude: ['.env'],
+      maximumFileSizeToCacheInBytes: 10485760
+    }),
     new CopyPlugin({
       patterns: [
         {

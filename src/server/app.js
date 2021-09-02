@@ -8,10 +8,11 @@ const axios = require('axios')
 
 dotenv.config({ path: path.resolve(__dirname, '.env') })
 
-const geoNamesApiUrl = process.env.GeoNamesAPIUrl
-const geoNamesApiUser = process.env.GeoNamesAPIUser
+// const geoNamesApiUrl = process.env.GeoNamesAPIUrl
+// const geoNamesApiUser = process.env.GeoNamesAPIUser
 
-if (typeof geoNamesApiUser === 'undefined' || geoNamesApiUrl === 'undefined') {
+if (typeof process.env.GeoNamesAPIUser === 'undefined' ||
+  process.env.GeoNamesAPIUrl === 'undefined') {
   console.error('File ./src/server/.env not found! The file contains the URL and API key for the ' +
     'MeaningCloud sentiment analysis service. See ./src/server/.env_tmpl for a template.')
 }
@@ -35,13 +36,19 @@ app.get('/qLocation', function (request, response) {
   })
 })
 
+app.get('/qWeatherCurrent', function (request, response) {
+  getWeatherCurrent(request.query.lat, request.query.lon, function (jsonData) {
+    response.status(200).send(JSON.stringify(jsonData))
+  })
+})
+
 function getGeoNames (location, callback) {
-  const url = new URL(geoNamesApiUrl)
+  const url = new URL(process.env.GeoNamesAPIUrl)
   url.search = new URLSearchParams(
     [
       ['name', location],
       ['maxRows', '10'],
-      ['username', geoNamesApiUser],
+      ['username', process.env.GeoNamesAPIUser],
       ['type', 'json'],
       ['featureClass', 'P'],
       ['featureClass', 'A'],
@@ -63,6 +70,24 @@ function getGeoNames (location, callback) {
         )
       })
       callback(suggestions)
+    })
+    .catch(error => {
+      console.error(error)
+    })
+}
+
+function getWeatherCurrent (lat, lon, callback) {
+  const url = new URL(process.env.WeatherbitAPIUrlCurrent)
+  url.search = new URLSearchParams(
+    [
+      ['lat', lat],
+      ['lon', lon],
+      ['key', process.env.WeatherbitAPIKey]
+    ]
+  ).toString()
+  axios.get(url.href)
+    .then(response => {
+      callback(response.data)
     })
     .catch(error => {
       console.error(error)
