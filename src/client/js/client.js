@@ -2,6 +2,7 @@ import '../styles/weather-icons.min.scss'
 import '../styles/resets.scss'
 import '../styles/main.scss'
 import '../styles/colors.scss'
+import { DateTime } from 'luxon'
 import fetch from 'node-fetch'
 
 let inputTimeOutId
@@ -20,7 +21,7 @@ function locationTextChanged () {
   const qStr = {
     location: document.getElementById('location').value
   }
-  return fetch('/qLocation?' + new URLSearchParams(qStr))
+  return fetch('/Location?' + new URLSearchParams(qStr))
     .then(response => response.json())
     .then(jsonData => {
       // update datalist for location input field
@@ -49,11 +50,11 @@ document.getElementById('submit').addEventListener('click', function (event) {
   let location = {}
   if (locationOptions.hasOwnProperty(document.getElementById('location').value)) {
     location = locationOptions[document.getElementById('location').value]
-    getWeatherData(location)
+    displayData(location)
   } else {
     getLocationData()
       .then(location => {
-        getWeatherData(location)
+        displayData(location)
       })
   }
 })
@@ -62,7 +63,7 @@ function getLocationData () {
   const qStr = {
     location: document.getElementById('location').value
   }
-  return fetch('/qLocation?' + new URLSearchParams(qStr))
+  return fetch('/location?' + new URLSearchParams(qStr))
     .then(response => response.json())
     .then(jsonData => {
       return jsonData[0]
@@ -72,15 +73,20 @@ function getLocationData () {
     })
 }
 
-function getWeatherData (location) {
+function displayData (location) {
+  displayWeatherData(location).then()
+}
+
+function displayWeatherData (location) {
   const qStr = {
     lat: location.lat,
     lon: location.lng
   }
-  return fetch('/qWeatherCurrent?' + new URLSearchParams(qStr))
+  return fetch('/currentWeather?' + new URLSearchParams(qStr))
     .then(response => response.json())
     .then(currentWeather => {
       updateCurrentWeather(location, currentWeather)
+      // displayCurrentTime(currentWeather).then()
     })
     .catch((err) => {
       console.error(err)
@@ -90,10 +96,32 @@ function getWeatherData (location) {
 function updateCurrentWeather (location, currentWeather) {
   document.getElementById('city').innerText = `${location.name}, `
   document.getElementById('country').innerText = `${location.countryName}`
-  document.getElementById('temp').innerText = `${currentWeather.data[0].app_temp}`
-  console.log('Location data:')
+  document.getElementById('temp').innerText = `${currentWeather.data[0].temp}`
+  const currTime = DateTime.now().setZone(currentWeather.data[0].timezone)
+  document.getElementById('current-time')
+    .innerText = currTime.toFormat('T')
+  document.getElementById('tz')
+    .innerText = `(${currTime.toFormat('ZZZZ')})`
+  document.getElementById('weather-description')
+    .innerText = currentWeather.data[0].weather.description
+  document.getElementById('wind-speed')
+    .innerText = currentWeather.data[0].wind_spd.toFixed(1)
+  document.getElementById('wind-direction')
+    .innerText = currentWeather.data[0].wind_cdir_full
+  document.getElementById('aqi')
+    .innerText = currentWeather.data[0].aqi
+  document.getElementById('relative-humidity')
+    .innerText = currentWeather.data[0].rh.toFixed(0)
+  document.getElementById('pressure')
+    .innerText = currentWeather.data[0].pres.toFixed(0)
+  // TODO: translate sunrise and sunset to correct time zone
+  document.getElementById('sunrise')
+    .innerText = currentWeather.data[0].sunrise
+  document.getElementById('sunset')
+    .innerText = currentWeather.data[0].sunset
+  console.log('location:')
   console.log(location)
-  console.log('Weather data:')
+  console.log('currentWeather:')
   console.log(currentWeather)
 }
 

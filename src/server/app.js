@@ -30,19 +30,25 @@ app.get('/', function (request, response) {
   response.status(200).sendFile(path.join(__dirname, '../../dist/index.html'))
 })
 
-app.get('/qLocation', function (request, response) {
-  getGeoNames(request.query.location, function (jsonData) {
+app.get('/location', function (request, response) {
+  getLocation(request.query.location, function (jsonData) {
     response.status(200).send(JSON.stringify(jsonData))
   })
 })
 
-app.get('/qWeatherCurrent', function (request, response) {
-  getWeatherCurrent(request.query.lat, request.query.lon, function (jsonData) {
+app.get('/currentWeather', function (request, response) {
+  getCurrentWeather(request.query.lat, request.query.lon, function (jsonData) {
     response.status(200).send(JSON.stringify(jsonData))
   })
 })
 
-function getGeoNames (location, callback) {
+app.get('/currentTime', function (request, response) {
+  getCurrentTime(request.query.tz, function (jsonData) {
+    response.status(200).send(JSON.stringify(jsonData))
+  })
+})
+
+function getLocation (location, callback) {
   const url = new URL(process.env.GeoNamesAPIUrl)
   url.search = new URLSearchParams(
     [
@@ -76,7 +82,7 @@ function getGeoNames (location, callback) {
     })
 }
 
-function getWeatherCurrent (lat, lon, callback) {
+function getCurrentWeather (lat, lon, callback) {
   const url = new URL(process.env.WeatherbitAPIUrlCurrent)
   url.search = new URLSearchParams(
     [

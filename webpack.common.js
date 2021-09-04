@@ -12,9 +12,8 @@ module.exports = {
     clean: true,
     library: {
       name: 'client',
-      type: 'umd',
-    },
-    clean: true,
+      type: 'umd'
+    }
   },
   module: {
     rules: [
