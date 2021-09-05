@@ -33,7 +33,6 @@ function locationTextChanged () {
 }
 
 function updateLocationSuggestions (jsonData) {
-  // console.log(jsonData)
   const newOptions = []
   jsonData.forEach((elem) => {
     const option = document.createElement('option')
@@ -46,7 +45,6 @@ function updateLocationSuggestions (jsonData) {
 
 // click on submit button
 document.getElementById('submit').addEventListener('click', function (event) {
-  // console.log(locationOptions[document.getElementById('location').value])
   let location = {}
   if (locationOptions.hasOwnProperty(document.getElementById('location').value)) {
     location = locationOptions[document.getElementById('location').value]
@@ -74,10 +72,11 @@ function getLocationData () {
 }
 
 function displayData (location) {
-  displayWeatherData(location).then()
+  displayCurrentWeather(location).then()
+  displayWeatherForecast(location).then()
 }
 
-function displayWeatherData (location) {
+function displayCurrentWeather (location) {
   const qStr = {
     lat: location.lat,
     lon: location.lng
@@ -86,7 +85,6 @@ function displayWeatherData (location) {
     .then(response => response.json())
     .then(currentWeather => {
       updateCurrentWeather(location, currentWeather)
-      // displayCurrentTime(currentWeather).then()
     })
     .catch((err) => {
       console.error(err)
@@ -94,16 +92,18 @@ function displayWeatherData (location) {
 }
 
 function updateCurrentWeather (location, currentWeather) {
-  document.getElementById('city').innerText = `${location.name}, `
-  document.getElementById('country').innerText = `${location.countryName}`
-  document.getElementById('temp').innerText = `${currentWeather.data[0].temp}`
+  document.getElementById('city').innerText = `${location.name},`
+  document.getElementById('country').innerText = ` ${location.countryName}`
   const currTime = DateTime.now().setZone(currentWeather.data[0].timezone)
   document.getElementById('current-time')
     .innerText = currTime.toFormat('T')
   document.getElementById('tz')
     .innerText = `(${currTime.toFormat('ZZZZ')})`
+  document.getElementById('current-day-icon')
+    .setAttribute('class', `wi wi-xx-large icon wi-owm-${currentWeather.data[0].weather.code}`)
   document.getElementById('weather-description')
     .innerText = currentWeather.data[0].weather.description
+  document.getElementById('temp').innerText = `${currentWeather.data[0].temp}`
   document.getElementById('wind-speed')
     .innerText = currentWeather.data[0].wind_spd.toFixed(1)
   document.getElementById('wind-direction')
@@ -114,15 +114,47 @@ function updateCurrentWeather (location, currentWeather) {
     .innerText = currentWeather.data[0].rh.toFixed(0)
   document.getElementById('pressure')
     .innerText = currentWeather.data[0].pres.toFixed(0)
-  // TODO: translate sunrise and sunset to correct time zone
   document.getElementById('sunrise')
-    .innerText = currentWeather.data[0].sunrise
+    .innerText = DateTime.fromISO(currentWeather.data[0].sunrise, { zone: 'utc' })
+      .setZone(currentWeather.data[0].timezone)
+      .toFormat('T')
   document.getElementById('sunset')
-    .innerText = currentWeather.data[0].sunset
-  console.log('location:')
-  console.log(location)
+    .innerText = DateTime.fromISO(currentWeather.data[0].sunset, { zone: 'utc' })
+      .setZone(currentWeather.data[0].timezone)
+      .toFormat('T')
   console.log('currentWeather:')
   console.log(currentWeather)
+}
+
+function displayWeatherForecast (location) {
+  const qStr = {
+    lat: location.lat,
+    lon: location.lng
+  }
+  return fetch('/weatherForecast?' + new URLSearchParams(qStr))
+    .then(response => response.json())
+    .then(weatherForecast => {
+      updateWeatherForecast(weatherForecast)
+    })
+    .catch((err) => {
+      console.error(err)
+    })
+}
+
+function updateWeatherForecast (weatherForecast) {
+  for (let i = 0; i < 7; i++) {
+    document.getElementById(`day-${i}`)
+      .innerText = DateTime.fromISO(weatherForecast.data[i].datetime).toFormat('ccc')
+    // TODO: double check whether correct icons are displayed
+    document.getElementById(`day-${i}-icon`)
+      .setAttribute('class', `wi forc-icons wi-owm-${weatherForecast.data[i].weather.code}`)
+    document.getElementById(`day-${i}-low_temp`)
+      .innerText = weatherForecast.data[i].low_temp.toFixed(0)
+    document.getElementById(`day-${i}-max_temp`)
+      .innerText = weatherForecast.data[i].max_temp.toFixed(0)
+    document.getElementById(`day-${i}-temp`)
+      .innerText = weatherForecast.data[i].temp.toFixed(0)
+  }
 }
 
 // Register a service worker

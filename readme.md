@@ -15,15 +15,14 @@ development.
 
 ## Appendix - Deploying the application on AWS Elastic Beanstalk
 
-## Appendix - Useful readings used during the project:
+## Appendix - Resources used during the project:
 
 - [Weatherbit API](https://www.weatherbit.io/api)
 - [REST Countries](https://restcountries.eu)
 - [Country.io](http://country.io): convert two-letter country codes to full name.
 - [Geonames API](https://www.geonames.org)
-  https://secure.geonames.org/search?name=Erfurt&maxRows=100&username=<USER ID>&type=json
-  &featureClass=P&featureClass=A
 - Pixabay API
 - [Icons8](https://icons8.com/)
 - [Luxon](https://moment.github.io/luxon/index.html#/)
+- [Weather icons](http://erikflowers.github.io/weather-icons)
 - 

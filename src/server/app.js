@@ -42,8 +42,8 @@ app.get('/currentWeather', function (request, response) {
   })
 })
 
-app.get('/currentTime', function (request, response) {
-  getCurrentTime(request.query.tz, function (jsonData) {
+app.get('/weatherForecast', function (request, response) {
+  getWeatherForecast(request.query.lat, request.query.lon, function (jsonData) {
     response.status(200).send(JSON.stringify(jsonData))
   })
 })
@@ -84,6 +84,24 @@ function getLocation (location, callback) {
 
 function getCurrentWeather (lat, lon, callback) {
   const url = new URL(process.env.WeatherbitAPIUrlCurrent)
+  url.search = new URLSearchParams(
+    [
+      ['lat', lat],
+      ['lon', lon],
+      ['key', process.env.WeatherbitAPIKey]
+    ]
+  ).toString()
+  axios.get(url.href)
+    .then(response => {
+      callback(response.data)
+    })
+    .catch(error => {
+      console.error(error)
+    })
+}
+
+function getWeatherForecast (lat, lon, callback) {
+  const url = new URL(process.env.WeatherbitAPIUrlForecast)
   url.search = new URLSearchParams(
     [
       ['lat', lat],

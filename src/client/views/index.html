@@ -80,7 +80,7 @@
           <div class="fc-row">
             <div class="fi-grow-1 fc-col ju-end">
               <p class="pad20">
-                <span id="city" class="city">-------, </span>
+                <span id="city" class="city">-------,</span>
                 <span id="country" class="country">-------</span>
               </p>
             </div>
@@ -98,7 +98,10 @@
           <div class="fc-row ma-b30">
             <div class="fi-grow-1 fc-col ju-center">
               <div class="fc-row pad20">
-                <i class="wi wi-day-cloudy wi-xx-large icon"></i>
+                <i id="current-day-icon"></i>
+              </div>
+              <div class="fc-row ju-center">
+                <p class="value"><span id="weather-description">---</span></p>
               </div>
             </div>
             <div class="fi-grow-1 fc-col ju-center">
@@ -108,7 +111,6 @@
             </div>
             <div class="fi-grow-3 values-container">
               <div class="fc-col ma-l20">
-                <p class="value"><span id="weather-description">---</span></p>
                 <p class="value">wind speed : <span id="wind-speed">---</span> m/s</p>
                 <p class="value">wind direction ; <span id="wind-direction">---</span></p>
                 <p class="value">AQI : <span id="aqi">---</span></p>
@@ -126,15 +128,15 @@
             <!-- One day forecast -->
             <div class="fi-grow-1 fc-col">
               <div class="fc-row ju-center">
-                <span class="forc-text">Mon</span>
+                <span id="day-0" class="forc-text">---</span>
               </div>
               <div class="fc-row ju-center">
-                <i class="wi wi-day-cloudy forc-icons"></i>
+                <i id="day-0-icon"></i>
               </div>
               <div class="fc-row ju-center">
                 <span class="forc-text">
-                  <span class="temp-range">13&deg; - 18&deg;</span>
-                  <span class="temp-single">15&deg;</span>
+                  <span class="temp-range"><span id="day-0-low_temp">--</span>&deg; - <span id="day-0-max_temp">--</span>&deg;</span>
+                  <span class="temp-single"><span id="day-0-temp">--</span>&deg;</span>
                 </span>
               </div>
             </div>
@@ -142,15 +144,15 @@
             <!-- One day forecast -->
             <div class="fi-grow-1 fc-col">
               <div class="fc-row ju-center border-l">
-                <span class="forc-text">Tue</span>
+                <span id="day-1" class="forc-text">---</span>
               </div>
               <div class="fc-row ju-center">
-                <i class="wi wi-day-sunny forc-icons"></i>
+                <i id="day-1-icon"></i>
               </div>
               <div class="fc-row ju-center">
                 <span class="forc-text">
-                  <span class="temp-range">13&deg; - 18&deg;</span>
-                  <span class="temp-single">15&deg;</span>
+                  <span class="temp-range"><span id="day-1-low_temp">--</span>&deg; - <span id="day-1-max_temp">--</span>&deg;</span>
+                  <span class="temp-single"><span id="day-1-temp">--</span>&deg;</span>
                 </span>
               </div>
             </div>
@@ -158,15 +160,15 @@
             <!-- One day forecast -->
             <div class="fi-grow-1 fc-col">
               <div class="fc-row ju-center border-l">
-                <span class="forc-text">Wed</span>
+                <span id="day-2" class="forc-text">---</span>
               </div>
               <div class="fc-row ju-center">
-                <i class="wi wi-snow forc-icons"></i>
+                <i id="day-2-icon"></i>
               </div>
               <div class="fc-row ju-center">
                 <span class="forc-text">
-                  <span class="temp-range">13&deg; - 18&deg;</span>
-                  <span class="temp-single">15&deg;</span>
+                  <span class="temp-range"><span id="day-2-low_temp">--</span>&deg; - <span id="day-2-max_temp">--</span>&deg;</span>
+                  <span class="temp-single"><span id="day-2-temp">--</span>&deg;</span>
                 </span>
               </div>
             </div>
@@ -174,15 +176,15 @@
             <!-- One day forecast -->
             <div class="fi-grow-1 fc-col">
               <div class="fc-row ju-center border-l">
-                <span class="forc-text">Thu</span>
+                <span id="day-3" class="forc-text">---</span>
               </div>
               <div class="fc-row ju-center">
-                <i class="wi wi-rain forc-icons"></i>
+                <i id="day-3-icon"></i>
               </div>
               <div class="fc-row ju-center">
                 <span class="forc-text">
-                  <span class="temp-range">13&deg; - 18&deg;</span>
-                  <span class="temp-single">15&deg;</span>
+                  <span class="temp-range"><span id="day-3-low_temp">--</span>&deg; - <span id="day-3-max_temp">--</span>&deg;</span>
+                  <span class="temp-single"><span id="day-3-temp">--</span>&deg;</span>
                 </span>
               </div>
             </div>
@@ -190,15 +192,15 @@
             <!-- One day forecast -->
             <div class="fi-grow-1 fc-col">
               <div class="fc-row ju-center border-l">
-                <span class="forc-text">Fri</span>
+                <span id="day-4" class="forc-text">---</span>
               </div>
               <div class="fc-row ju-center">
-                <i class="wi wi-cloud forc-icons"></i>
+                <i id="day-4-icon"></i>
               </div>
               <div class="fc-row ju-center">
                 <span class="forc-text">
-                  <span class="temp-range">13&deg; - 18&deg;</span>
-                  <span class="temp-single">15&deg;</span>
+                  <span class="temp-range"><span id="day-4-low_temp">--</span>&deg; - <span id="day-4-max_temp">--</span>&deg;</span>
+                  <span class="temp-single"><span id="day-4-temp">--</span>&deg;</span>
                 </span>
               </div>
             </div>
@@ -206,15 +208,15 @@
             <!-- One day forecast -->
             <div class="fi-grow-1 fc-col">
               <div class="fc-row ju-center border-l">
-                <span class="forc-text">Sat</span>
+                <span id="day-5" class="forc-text">---</span>
               </div>
               <div class="fc-row ju-center">
-                <i class="wi wi-lightning forc-icons"></i>
+                <i id="day-5-icon"></i>
               </div>
               <div class="fc-row ju-center">
                 <span class="forc-text">
-                  <span class="temp-range">13&deg; - 18&deg;</span>
-                  <span class="temp-single">15&deg;</span>
+                  <span class="temp-range"><span id="day-5-low_temp">--</span>&deg; - <span id="day-5-max_temp">--</span>&deg;</span>
+                  <span class="temp-single"><span id="day-5-temp">--</span>&deg;</span>
                 </span>
               </div>
             </div>
@@ -222,15 +224,15 @@
             <!-- One day forecast -->
             <div class="fi-grow-1 fc-col">
               <div class="fc-row ju-center border-l">
-                <span class="forc-text">Sun</span>
+                <span id="day-6" class="forc-text">---</span>
               </div>
               <div class="fc-row ju-center">
-                <i class="wi wi-day-fog forc-icons"></i>
+                <i id="day-6-icon"></i>
               </div>
               <div class="fc-row ju-center">
                 <span class="forc-text">
-                  <span class="temp-range">13&deg; - 18&deg;</span>
-                  <span class="temp-single">15&deg;</span>
+                  <span class="temp-range"><span id="day-6-low_temp">--</span>&deg; - <span id="day-6-max_temp">--</span>&deg;</span>
+                  <span class="temp-single"><span id="day-6-temp">--</span>&deg;</span>
                 </span>
               </div>
             </div>
