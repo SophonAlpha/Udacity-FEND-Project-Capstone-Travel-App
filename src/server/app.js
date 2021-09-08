@@ -48,6 +48,12 @@ app.get('/weatherForecast', function (request, response) {
   })
 })
 
+app.get('/locationImage', function (request, response) {
+  getLocationImage(request.query.query, function (jsonData) {
+    response.status(200).send(JSON.stringify(jsonData))
+  })
+})
+
 function getLocation (location, callback) {
   const url = new URL(process.env.GeoNamesAPIUrl)
   url.search = new URLSearchParams(
@@ -107,6 +113,24 @@ function getWeatherForecast (lat, lon, callback) {
       ['lat', lat],
       ['lon', lon],
       ['key', process.env.WeatherbitAPIKey]
+    ]
+  ).toString()
+  axios.get(url.href)
+    .then(response => {
+      callback(response.data)
+    })
+    .catch(error => {
+      console.error(error)
+    })
+}
+
+function getLocationImage (query, callback) {
+  const url = new URL(process.env.PixabayAPIUrl)
+  url.search = new URLSearchParams(
+    [
+      ['q', query],
+      ['image_type', 'photo'],
+      ['key', process.env.PixabayAPIKey]
     ]
   ).toString()
   axios.get(url.href)

@@ -72,8 +72,15 @@ function getLocationData () {
 }
 
 function displayData (location) {
+  displayLocation(location)
   displayCurrentWeather(location).then()
   displayWeatherForecast(location).then()
+  displayImage(location)
+}
+
+function displayLocation (location) {
+  document.getElementById('city').innerText = `${location.name},`
+  document.getElementById('country').innerText = ` ${location.countryName}`
 }
 
 function displayCurrentWeather (location) {
@@ -92,8 +99,6 @@ function displayCurrentWeather (location) {
 }
 
 function updateCurrentWeather (location, currentWeather) {
-  document.getElementById('city').innerText = `${location.name},`
-  document.getElementById('country').innerText = ` ${location.countryName}`
   const currTime = DateTime.now().setZone(currentWeather.data[0].timezone)
   document.getElementById('current-time')
     .innerText = currTime.toFormat('T')
@@ -116,14 +121,12 @@ function updateCurrentWeather (location, currentWeather) {
     .innerText = currentWeather.data[0].pres.toFixed(0)
   document.getElementById('sunrise')
     .innerText = DateTime.fromISO(currentWeather.data[0].sunrise, { zone: 'utc' })
-      .setZone(currentWeather.data[0].timezone)
-      .toFormat('T')
+    .setZone(currentWeather.data[0].timezone)
+    .toFormat('T')
   document.getElementById('sunset')
     .innerText = DateTime.fromISO(currentWeather.data[0].sunset, { zone: 'utc' })
-      .setZone(currentWeather.data[0].timezone)
-      .toFormat('T')
-  console.log('currentWeather:')
-  console.log(currentWeather)
+    .setZone(currentWeather.data[0].timezone)
+    .toFormat('T')
 }
 
 function displayWeatherForecast (location) {
@@ -146,6 +149,7 @@ function updateWeatherForecast (weatherForecast) {
     document.getElementById(`day-${i}`)
       .innerText = DateTime.fromISO(weatherForecast.data[i].datetime).toFormat('ccc')
     // TODO: double check whether correct icons are displayed
+    // TODO: check html design when displaying New York
     document.getElementById(`day-${i}-icon`)
       .setAttribute('class', `wi forc-icons wi-owm-${weatherForecast.data[i].weather.code}`)
     document.getElementById(`day-${i}-low_temp`)
@@ -155,6 +159,28 @@ function updateWeatherForecast (weatherForecast) {
     document.getElementById(`day-${i}-temp`)
       .innerText = weatherForecast.data[i].temp.toFixed(0)
   }
+}
+
+function displayImage (location) {
+  console.log('location :')
+  console.log(location)
+  const qStr = {
+    query: `${location.name}+${location.adminName1}+${location.countryName}`
+  }
+  return fetch('/locationImage?' + new URLSearchParams(qStr))
+    .then(response => response.json())
+    .then(locationImage => {
+      updateLocationImage(locationImage)
+    })
+    .catch((err) => {
+      console.error(err)
+    })
+}
+
+function updateLocationImage (locationImage) {
+  console.log('locationImage:')
+  console.log(locationImage)
+  // TODO: change CSS class 'img-box' attribute 'background-image'
 }
 
 // Register a service worker
