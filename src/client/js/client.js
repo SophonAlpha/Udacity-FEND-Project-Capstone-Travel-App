@@ -1,3 +1,5 @@
+import 'core-js/stable'
+import 'regenerator-runtime/runtime'
 import '../styles/weather-icons.min.scss'
 import '../styles/resets.scss'
 import '../styles/main.scss'
@@ -75,7 +77,7 @@ function displayData (location) {
   displayLocation(location)
   displayCurrentWeather(location).then()
   displayWeatherForecast(location).then()
-  displayImage(location)
+  displayImage(location).then()
 }
 
 function displayLocation (location) {
@@ -121,12 +123,12 @@ function updateCurrentWeather (location, currentWeather) {
     .innerText = currentWeather.data[0].pres.toFixed(0)
   document.getElementById('sunrise')
     .innerText = DateTime.fromISO(currentWeather.data[0].sunrise, { zone: 'utc' })
-    .setZone(currentWeather.data[0].timezone)
-    .toFormat('T')
+      .setZone(currentWeather.data[0].timezone)
+      .toFormat('T')
   document.getElementById('sunset')
     .innerText = DateTime.fromISO(currentWeather.data[0].sunset, { zone: 'utc' })
-    .setZone(currentWeather.data[0].timezone)
-    .toFormat('T')
+      .setZone(currentWeather.data[0].timezone)
+      .toFormat('T')
 }
 
 function displayWeatherForecast (location) {
@@ -161,26 +163,44 @@ function updateWeatherForecast (weatherForecast) {
   }
 }
 
-function displayImage (location) {
-  console.log('location :')
+async function displayImage (location) {
+  console.log('location:')
   console.log(location)
+  // Try with all three location attributes.
   const qStr = {
     query: `${location.name}+${location.adminName1}+${location.countryName}`
   }
-  return fetch('/locationImage?' + new URLSearchParams(qStr))
+  const json = await fetch('/locationImage?' + new URLSearchParams(qStr))
     .then(response => response.json())
-    .then(locationImage => {
-      updateLocationImage(locationImage)
-    })
     .catch((err) => {
       console.error(err)
     })
+  if (json.total === 0) {
+
+  }
+  console.log('json')
+  console.log(json)
+
+  // return fetch('/locationImage?' + new URLSearchParams(qStr))
+  //   .then(response => response.json())
+  //   .then(locationImage => {
+  //     updateLocationImage(locationImage)
+  //   })
+  //   .catch((err) => {
+  //     console.error(err)
+  //   })
 }
 
 function updateLocationImage (locationImage) {
   console.log('locationImage:')
   console.log(locationImage)
-  // TODO: change CSS class 'img-box' attribute 'background-image'
+  console.log('locationImage.hits[0].webformatURL')
+  console.log(locationImage.hits[0].webformatURL)
+  document.getElementById('img-box')
+    .style.backgroundImage = `url("${locationImage.hits[0].webformatURL}")`
+  document.getElementById('img-credit')
+    .href = `https://pixabay.com/users/${locationImage.hits[0].user}-${locationImage.hits[0].user_id}/`
+  document.getElementById('img-credit').innerText = locationImage.hits[0].user
 }
 
 // Register a service worker

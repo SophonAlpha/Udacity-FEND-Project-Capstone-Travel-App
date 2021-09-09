@@ -214,16 +214,6 @@
   margin: 0;
 }
 
-.city-img {
-  display: block;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  /*min-height: 100%;*/
-  /*min-width: 10%;*/
-  transform: translate(-50%, -50%);
-}
-
 .border-l {
   border-left: white 1px solid;
 }
