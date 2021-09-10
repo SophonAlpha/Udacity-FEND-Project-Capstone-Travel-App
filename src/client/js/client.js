@@ -77,7 +77,9 @@ function displayData (location) {
   displayLocation(location)
   displayCurrentWeather(location).then()
   displayWeatherForecast(location).then()
+  unhideDataSection()
   displayImage(location).then()
+  unhideImageSection()
 }
 
 function displayLocation (location) {
@@ -151,7 +153,7 @@ function updateWeatherForecast (weatherForecast) {
     document.getElementById(`day-${i}`)
       .innerText = DateTime.fromISO(weatherForecast.data[i].datetime).toFormat('ccc')
     // TODO: double check whether correct icons are displayed
-    // TODO: check html design when displaying New York
+    // TODO: check html layout when displaying New York
     document.getElementById(`day-${i}-icon`)
       .setAttribute('class', `wi forc-icons wi-owm-${weatherForecast.data[i].weather.code}`)
     document.getElementById(`day-${i}-low_temp`)
@@ -163,44 +165,45 @@ function updateWeatherForecast (weatherForecast) {
   }
 }
 
+function unhideDataSection () {
+  document.getElementById('data-section').classList.remove('display-none')
+}
+
 async function displayImage (location) {
-  console.log('location:')
-  console.log(location)
-  // Try with all three location attributes.
-  const qStr = {
-    query: `${location.name}+${location.adminName1}+${location.countryName}`
+  const queries = [
+    { query: `${location.name}+${location.adminName1}+${location.countryName}` },
+    { query: `${location.name}+${location.countryName}` },
+    { query: `${location.countryName}` }
+  ]
+  let imgFound = false
+  while (queries.length > 0) {
+    const qStr = queries.shift()
+    const locationImage = await fetch('/locationImage?' + new URLSearchParams(qStr))
+      .then(response => response.json())
+      .catch((err) => {
+        console.error(err)
+      })
+    if (locationImage.total > 0) {
+      updateLocationImage(locationImage)
+      imgFound = true
+      break
+    }
   }
-  const json = await fetch('/locationImage?' + new URLSearchParams(qStr))
-    .then(response => response.json())
-    .catch((err) => {
-      console.error(err)
-    })
-  if (json.total === 0) {
-
+  if (!imgFound) {
+    // TODO: No image found. Hide the image panel.
   }
-  console.log('json')
-  console.log(json)
-
-  // return fetch('/locationImage?' + new URLSearchParams(qStr))
-  //   .then(response => response.json())
-  //   .then(locationImage => {
-  //     updateLocationImage(locationImage)
-  //   })
-  //   .catch((err) => {
-  //     console.error(err)
-  //   })
 }
 
 function updateLocationImage (locationImage) {
-  console.log('locationImage:')
-  console.log(locationImage)
-  console.log('locationImage.hits[0].webformatURL')
-  console.log(locationImage.hits[0].webformatURL)
   document.getElementById('img-box')
     .style.backgroundImage = `url("${locationImage.hits[0].webformatURL}")`
   document.getElementById('img-credit')
     .href = `https://pixabay.com/users/${locationImage.hits[0].user}-${locationImage.hits[0].user_id}/`
   document.getElementById('img-credit').innerText = locationImage.hits[0].user
+}
+
+function unhideImageSection () {
+  document.getElementById('image-section').classList.remove('display-none')
 }
 
 // Register a service worker
