@@ -20,6 +20,11 @@ document.getElementById('location').addEventListener('input', function (event) {
 })
 
 function locationTextChanged () {
+  // Hide the data and image sections. Remove the error message.
+  document.getElementById('data-section').classList.add('display-none')
+  document.getElementById('image-section').classList.add('display-none')
+  document.getElementById('error-msg').classList.add('visibility-hidden')
+  // Get a list of suggestions for locations.
   const qStr = {
     location: document.getElementById('location').value
   }
@@ -54,7 +59,11 @@ document.getElementById('submit').addEventListener('click', function (event) {
   } else {
     getLocationData()
       .then(location => {
-        displayData(location)
+        if (typeof location === 'undefined') {
+          document.getElementById('error-msg').classList.remove('visibility-hidden')
+        } else {
+          displayData(location)
+        }
       })
   }
 })
