@@ -19,7 +19,7 @@
 
 </head>
 
-<body class="bkg-img">
+<body>
 
 <div class="content fc-row ju-center">
   <div class="fc-col max-w900 ma-l10 ma-r10">
@@ -37,234 +37,262 @@
     ########## Input section ##########
     -->
     <div class="fc-col ma-b50">
-      <div class="input_container">
-        <div class="fi-grow-2 fc-col">
-          <!-- Error message -->
-          <p id="error-msg" class="error visibility-hidden">Unfortunately, I don’t know this place.
-            Please choose another location.</p>
-          <!-- Input location -->
-          <input id="location" type="text" list="suggestions" class="input"
-                 placeholder="Where you want to go?">
-          <datalist id="suggestions" open="open">
-            <option value="Erfurt">
-            <option value="Berlin">
-            <option value="Dubai">
-            <option value="Lagos">
-            <option value="Peking">
-            <option value="Tokyo">
-            <option value="Hong Kong">
-          </datalist>
-        </div>
-        <!-- Input date -->
-        <div class="fi-grow-2 fc-col ju-end">
-          <input type="date" class="input" placeholder="When?"
-                 min="2021-08-26">
-        </div>
-        <!-- Submit -->
-        <div class="fi-grow-1 fc-col ju-end">
-          <input id="submit" type="submit" class="submit" value="Let's go!">
+
+      <div class="fc-row ju-center bkg-col-field-drab">
+        <div class="fc-col">
+          <div class="fc-row">
+            <div>
+              <label class="input-label">My trip to: </label>
+              <input id="location" type="text" list="suggestions" class="input"
+                     placeholder="Where you want to go?">
+              <datalist id="suggestions" open="open">
+                <option value="Erfurt">
+                <option value="Berlin">
+                <option value="Dubai">
+                <option value="Lagos">
+                <option value="Peking">
+                <option value="Tokyo">
+                <option value="Hong Kong">
+              </datalist>
+            </div>
+          </div>
+          <div class="fc-row">
+            <div>
+              <label class="input-label">Departing: </label>
+              <input id="date" type="date" class="input">
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!--
-    ########## Data and image sections ##########
-    -->
-    <div class="fc-col ma-b150">
-      <div class="info-container">
+    <div class="input_container dbg-border--green">
+      <div class="fi-grow-2 fc-col">
+        <!-- Error message -->
+        <p id="error-msg" class="error">Unfortunately, I don’t know this place.
+          Please choose another location.</p>
+        <!-- Input location -->
+        <input id="location_" type="text" list="suggestions" class="input"
+               placeholder="Where you want to go?">
+        <datalist id="suggestions_" open="open">
+          <option value="Erfurt">
+          <option value="Berlin">
+          <option value="Dubai">
+          <option value="Lagos">
+          <option value="Peking">
+          <option value="Tokyo">
+          <option value="Hong Kong">
+        </datalist>
+      </div>
+      <!-- Input date -->
+      <div class="fi-grow-2 fc-col ju-end">
+        <input id="date_" type="date" class="input">
+      </div>
+      <!-- Submit -->
+      <div class="fi-grow-1 fc-col ju-end">
+        <input id="submit" type="submit" class="submit" value="Let's go!">
+      </div>
+    </div>
+  </div>
 
-        <!-- Data section -->
-        <div id="data-section" class="fc-col bkg-col-midnight-green-eagle-green display-none">
+  <!--
+  ########## Data and image sections ##########
+  -->
+  <div class="fc-col ma-b150">
+    <div class="info-container">
 
-          <!-- First row: location and time -->
-          <div class="fc-row">
-            <div class="fi-grow-1 fc-col ju-end">
-              <p class="pad20">
-                <span id="city" class="city">-------,</span>
-                <span id="country" class="country">-------</span>
-              </p>
+      <!-- Data section -->
+      <div id="data-section" class="fc-col bkg-col-midnight-green-eagle-green">
+
+        <!-- First row: location and time -->
+        <div class="fc-row">
+          <div class="fi-grow-1 fc-col ju-end">
+            <p class="pad20">
+              <span id="city" class="city">-------,</span>
+              <span id="country" class="country">-------</span>
+            </p>
+          </div>
+          <div class="fc-col pad20">
+            <div class="fc-row ju-end">
+              <span id="current-time" class="time">--:--</span>
             </div>
-            <div class="fc-col pad20">
-              <div class="fc-row ju-end">
-                <span id="current-time" class="time">--:--</span>
-              </div>
-              <div class="fc-row ju-end">
-                <span class="tz">Local time <span id="tz">---</span></span>
-              </div>
+            <div class="fc-row ju-end">
+              <span class="tz">Local time <span id="tz">---</span></span>
             </div>
           </div>
+        </div>
 
-          <!-- Second row: icon, temperature, other values -->
-          <div class="fc-row ma-b30">
-            <div class="fi-grow-1 fc-col ju-center">
-              <div class="fc-row pad20">
-                <i id="current-day-icon"></i>
-              </div>
-              <div class="fc-row ju-center">
-                <p class="value"><span id="weather-description">---</span></p>
-              </div>
+        <!-- Second row: icon, temperature, other values -->
+        <div class="fc-row ma-b30">
+          <div class="fi-grow-1 fc-col ju-center">
+            <div class="fc-row pad20">
+              <i id="current-day-icon"></i>
             </div>
-            <div class="fi-grow-1 fc-col ju-center">
-              <div class="fc-row">
-                <span class="temp ma-r20"><span id="temp">--</span>&deg;C</span>
-              </div>
-            </div>
-            <div class="fi-grow-3 values-container">
-              <div class="fc-col ma-l20">
-                <p class="value">wind speed: <span id="wind-speed">---</span> m/s</p>
-                <p class="value">wind direction: <span id="wind-direction">---</span></p>
-                <p class="value">AQI: <span id="aqi">---</span></p>
-                <p class="value">rel. humidity: <span id="relative-humidity">---</span> %</p>
-                <p class="value">pressure: <span id="pressure">---</span> mb</p>
-                <p class="value">sunrise: <span id="sunrise">---</span></p>
-                <p class="value">sunset: <span id="sunset">---</span></p>
-              </div>
+            <div class="fc-row ju-center">
+              <p class="value"><span id="weather-description">---</span></p>
             </div>
           </div>
+          <div class="fi-grow-1 fc-col ju-center">
+            <div class="fc-row">
+              <span class="temp ma-r20"><span id="temp">--</span>&deg;C</span>
+            </div>
+          </div>
+          <div class="fi-grow-3 values-container">
+            <div class="fc-col ma-l20">
+              <p class="value">wind speed: <span id="wind-speed">---</span> m/s</p>
+              <p class="value">wind direction: <span id="wind-direction">---</span></p>
+              <p class="value">AQI: <span id="aqi">---</span></p>
+              <p class="value">rel. humidity: <span id="relative-humidity">---</span> %</p>
+              <p class="value">pressure: <span id="pressure">---</span> mb</p>
+              <p class="value">sunrise: <span id="sunrise">---</span></p>
+              <p class="value">sunset: <span id="sunset">---</span></p>
+            </div>
+          </div>
+        </div>
 
-          <!-- Third row: forecast -->
-          <div class="fc-row bkg-col-olive-drab-7">
+        <!-- Third row: forecast -->
+        <div class="fc-row bkg-col-olive-drab-7">
 
-            <!-- One day forecast -->
-            <div class="fi-grow-1 fc-col">
-              <div class="fc-row ju-center">
-                <span id="day-0" class="forc-text">---</span>
-              </div>
-              <div class="fc-row ju-center">
-                <i id="day-0-icon"></i>
-              </div>
-              <div class="fc-row ju-center">
+          <!-- One day forecast -->
+          <div class="fi-grow-1 fc-col">
+            <div class="fc-row ju-center">
+              <span id="day-0" class="forc-text">---</span>
+            </div>
+            <div class="fc-row ju-center">
+              <i id="day-0-icon"></i>
+            </div>
+            <div class="fc-row ju-center">
                 <span class="forc-text">
-                  <span class="temp-range"><span id="day-0-low_temp">--</span>&deg; - <span id="day-0-max_temp">--</span>&deg;</span>
+                  <span class="temp-range"><span id="day-0-low_temp">--</span>&deg; - <span
+                    id="day-0-max_temp">--</span>&deg;</span>
                   <span class="temp-single"><span id="day-0-temp">--</span>&deg;</span>
                 </span>
-              </div>
             </div>
+          </div>
 
-            <!-- One day forecast -->
-            <div class="fi-grow-1 fc-col">
-              <div class="fc-row ju-center border-l">
-                <span id="day-1" class="forc-text">---</span>
-              </div>
-              <div class="fc-row ju-center">
-                <i id="day-1-icon"></i>
-              </div>
-              <div class="fc-row ju-center">
+          <!-- One day forecast -->
+          <div class="fi-grow-1 fc-col">
+            <div class="fc-row ju-center border-l">
+              <span id="day-1" class="forc-text">---</span>
+            </div>
+            <div class="fc-row ju-center">
+              <i id="day-1-icon"></i>
+            </div>
+            <div class="fc-row ju-center">
                 <span class="forc-text">
-                  <span class="temp-range"><span id="day-1-low_temp">--</span>&deg; - <span id="day-1-max_temp">--</span>&deg;</span>
+                  <span class="temp-range"><span id="day-1-low_temp">--</span>&deg; - <span
+                    id="day-1-max_temp">--</span>&deg;</span>
                   <span class="temp-single"><span id="day-1-temp">--</span>&deg;</span>
                 </span>
-              </div>
             </div>
+          </div>
 
-            <!-- One day forecast -->
-            <div class="fi-grow-1 fc-col">
-              <div class="fc-row ju-center border-l">
-                <span id="day-2" class="forc-text">---</span>
-              </div>
-              <div class="fc-row ju-center">
-                <i id="day-2-icon"></i>
-              </div>
-              <div class="fc-row ju-center">
+          <!-- One day forecast -->
+          <div class="fi-grow-1 fc-col">
+            <div class="fc-row ju-center border-l">
+              <span id="day-2" class="forc-text">---</span>
+            </div>
+            <div class="fc-row ju-center">
+              <i id="day-2-icon"></i>
+            </div>
+            <div class="fc-row ju-center">
                 <span class="forc-text">
-                  <span class="temp-range"><span id="day-2-low_temp">--</span>&deg; - <span id="day-2-max_temp">--</span>&deg;</span>
+                  <span class="temp-range"><span id="day-2-low_temp">--</span>&deg; - <span
+                    id="day-2-max_temp">--</span>&deg;</span>
                   <span class="temp-single"><span id="day-2-temp">--</span>&deg;</span>
                 </span>
-              </div>
             </div>
+          </div>
 
-            <!-- One day forecast -->
-            <div class="fi-grow-1 fc-col">
-              <div class="fc-row ju-center border-l">
-                <span id="day-3" class="forc-text">---</span>
-              </div>
-              <div class="fc-row ju-center">
-                <i id="day-3-icon"></i>
-              </div>
-              <div class="fc-row ju-center">
+          <!-- One day forecast -->
+          <div class="fi-grow-1 fc-col">
+            <div class="fc-row ju-center border-l">
+              <span id="day-3" class="forc-text">---</span>
+            </div>
+            <div class="fc-row ju-center">
+              <i id="day-3-icon"></i>
+            </div>
+            <div class="fc-row ju-center">
                 <span class="forc-text">
-                  <span class="temp-range"><span id="day-3-low_temp">--</span>&deg; - <span id="day-3-max_temp">--</span>&deg;</span>
+                  <span class="temp-range"><span id="day-3-low_temp">--</span>&deg; - <span
+                    id="day-3-max_temp">--</span>&deg;</span>
                   <span class="temp-single"><span id="day-3-temp">--</span>&deg;</span>
                 </span>
-              </div>
             </div>
+          </div>
 
-            <!-- One day forecast -->
-            <div class="fi-grow-1 fc-col">
-              <div class="fc-row ju-center border-l">
-                <span id="day-4" class="forc-text">---</span>
-              </div>
-              <div class="fc-row ju-center">
-                <i id="day-4-icon"></i>
-              </div>
-              <div class="fc-row ju-center">
+          <!-- One day forecast -->
+          <div class="fi-grow-1 fc-col">
+            <div class="fc-row ju-center border-l">
+              <span id="day-4" class="forc-text">---</span>
+            </div>
+            <div class="fc-row ju-center">
+              <i id="day-4-icon"></i>
+            </div>
+            <div class="fc-row ju-center">
                 <span class="forc-text">
-                  <span class="temp-range"><span id="day-4-low_temp">--</span>&deg; - <span id="day-4-max_temp">--</span>&deg;</span>
+                  <span class="temp-range"><span id="day-4-low_temp">--</span>&deg; - <span
+                    id="day-4-max_temp">--</span>&deg;</span>
                   <span class="temp-single"><span id="day-4-temp">--</span>&deg;</span>
                 </span>
-              </div>
             </div>
+          </div>
 
-            <!-- One day forecast -->
-            <div class="fi-grow-1 fc-col">
-              <div class="fc-row ju-center border-l">
-                <span id="day-5" class="forc-text">---</span>
-              </div>
-              <div class="fc-row ju-center">
-                <i id="day-5-icon"></i>
-              </div>
-              <div class="fc-row ju-center">
+          <!-- One day forecast -->
+          <div class="fi-grow-1 fc-col">
+            <div class="fc-row ju-center border-l">
+              <span id="day-5" class="forc-text">---</span>
+            </div>
+            <div class="fc-row ju-center">
+              <i id="day-5-icon"></i>
+            </div>
+            <div class="fc-row ju-center">
                 <span class="forc-text">
-                  <span class="temp-range"><span id="day-5-low_temp">--</span>&deg; - <span id="day-5-max_temp">--</span>&deg;</span>
+                  <span class="temp-range"><span id="day-5-low_temp">--</span>&deg; - <span
+                    id="day-5-max_temp">--</span>&deg;</span>
                   <span class="temp-single"><span id="day-5-temp">--</span>&deg;</span>
                 </span>
-              </div>
             </div>
+          </div>
 
-            <!-- One day forecast -->
-            <div class="fi-grow-1 fc-col">
-              <div class="fc-row ju-center border-l">
-                <span id="day-6" class="forc-text">---</span>
-              </div>
-              <div class="fc-row ju-center">
-                <i id="day-6-icon"></i>
-              </div>
-              <div class="fc-row ju-center">
+          <!-- One day forecast -->
+          <div class="fi-grow-1 fc-col">
+            <div class="fc-row ju-center border-l">
+              <span id="day-6" class="forc-text">---</span>
+            </div>
+            <div class="fc-row ju-center">
+              <i id="day-6-icon"></i>
+            </div>
+            <div class="fc-row ju-center">
                 <span class="forc-text">
-                  <span class="temp-range"><span id="day-6-low_temp">--</span>&deg; - <span id="day-6-max_temp">--</span>&deg;</span>
+                  <span class="temp-range"><span id="day-6-low_temp">--</span>&deg; - <span
+                    id="day-6-max_temp">--</span>&deg;</span>
                   <span class="temp-single"><span id="day-6-temp">--</span>&deg;</span>
                 </span>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- Image section -->
-        <div id="image-section" class="image-container display-none">
-          <div id="img-box" class="fi-grow-1 img-box fc-col">
-            <div class="fc-row ju-end">
-              <div class="fc-col">
-                <p class="img-credit">Image by
-                  <a id="img-credit">---</a> from
-                  <a href="https://pixabay.com">Pixabay</a>
-                </p>
-              </div>
             </div>
           </div>
-        </div>
 
+        </div>
       </div>
+
+      <!-- Image section -->
+      <div id="image-section" class="image-container">
+        <div id="img-box" class="fi-grow-1 img-box fc-col">
+          <div class="fc-row ju-end">
+            <div class="fc-col">
+              <p class="img-credit">Image by
+                <a id="img-credit">---</a> from
+                <a href="https://pixabay.com">Pixabay</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
-
   </div>
-</div>
 
-<div class="other-credits">
-  Background image by <a
-  href="https://pixabay.com/users/nietjuh-2218222/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2946959">Ylanite
-  Koppens</a> from <a
-  href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2946959">Pixabay</a>
+</div>
 </div>
 
 <div class="other-credits">

@@ -131,17 +131,27 @@
   }
 }
 
-.input {
-  height: 45px;
+.input-label {
   font-family: 'Open Sans', sans-serif;
   font-size: 14pt;
+  color: white;
+}
+
+.input {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14pt;
+  color: white;
+  background-color: var(--field-drab);
   border-radius: 0;
   border-top-style: hidden;
   border-right-style: hidden;
   border-left-style: hidden;
-  border-bottom: 3px solid var(--cambridge-blue);
-  padding: 10px;
-  margin-right: 20px;
+  border-bottom-style: hidden;
+}
+
+.input::placeholder {
+  color: white;
+  opacity: 0.4;
 }
 
 @media screen and (max-width: 650px) {
@@ -229,6 +239,10 @@
   background-color: var(--olive-drab-7);
 }
 
+.bkg-col-field-drab {
+  background-color: var(--field-drab);
+}
+
 .city {
   font-family: 'Work Sans', sans-serif;
   font-weight: normal;
@@ -309,6 +323,7 @@
 }
 
 .img-box {
+  background-image: url("../img/dom-4575515_1920.jpg");
   background-size: cover;
   background-position: center;
 }

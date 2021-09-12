@@ -10,9 +10,9 @@
   "scripts": {
     "build-dev": "webpack --config webpack.dev.js",
     "node-dev": "concurrently \"webpack --config webpack.dev.js\" \"sleepms 3000 && nodemon ./src/server/server.js\" \"sleepms 5000 && opener http://localhost:3000\"",
-    "start-dev": "webpack serve --config webpack.dev.js --open",
-    "start": "node ./src/server/server.js",
+    "dev": "webpack serve --config webpack.dev.js --open",
     "test": "jest",
+    "start": "node ./src/server/server.js",
     "test-coverage": "jest --coverage",
     "build-prod": "webpack --config webpack.prod.js",
     "node-prod": "concurrently \"webpack --config webpack.prod.js\" \"sleepms 3000 && node ./src/server/server.js\" \"sleepms 5000 && opener http://localhost:3000\""
