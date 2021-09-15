@@ -48,12 +48,28 @@
   margin-left: 20px;
 }
 
+.ma-t20 {
+  margin-top: 20px;
+}
+
+.ma-t30 {
+  margin-top: 30px;
+}
+
 .ma-t50 {
   margin-top: 50px;
 }
 
 .ma-t100 {
   margin-top: 100px;
+}
+
+.ma-b10 {
+  margin-bottom: 10px;
+}
+
+.ma-b20 {
+  margin-bottom: 20px;
 }
 
 .ma-b30 {
@@ -116,7 +132,6 @@
   font-family: 'Open Sans', sans-serif;
   font-size: 11pt;
   color: var(--carnelian);
-  margin: 10px 20px 10px 10px;
 }
 
 .input_container {
@@ -171,25 +186,39 @@
 }
 
 .submit {
-  height: 45px;
   font-family: 'Open Sans', sans-serif;
   font-size: 14pt;
   color: white;
-  background-color: var(--field-drab);
-  border-radius: 0;
-  border-top-style: hidden;
-  border-right-style: hidden;
-  border-left-style: hidden;
-  border-bottom: 3px solid var(--field-drab);
+  background-color: var(--hookers-green);
+  border-radius: 3px;
+  border: hidden;
   padding: 10px;
 }
 
 .submit:hover {
-  box-shadow: 0 0 4px var(--hookers-green);
+  box-shadow: 0 0 7px var(--midnight-green-eagle-green);
 }
 
 .submit:active {
-  background-color: var(--olive-drab-7);
+  background-color: var(--midnight-green-eagle-green);
+}
+
+.remove {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14pt;
+  color: white;
+  background-color: var(--midnight-green-eagle-green);
+  border-radius: 3px;
+  border: var(--hookers-green) 3px solid;
+  padding: 3px 20px 3px 20px;
+}
+
+.remove:hover {
+  box-shadow: 0 0 7px var(--hookers-green);
+}
+
+.remove:active {
+  background-color: var(--hookers-green);
 }
 
 .info-container {
@@ -241,6 +270,13 @@
 
 .bkg-col-field-drab {
   background-color: var(--field-drab);
+}
+
+.default-font {
+  font-family: 'Work Sans', sans-serif;
+  font-weight: normal;
+  font-size: 14pt;
+  color: white;
 }
 
 .city {
