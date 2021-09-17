@@ -8,6 +8,7 @@ import { DateTime } from 'luxon'
 import fetch from 'node-fetch'
 
 let inputTimeOutId
+let tripIndex = 11
 const inputTimeOut = 100
 const locationOptions = {}
 
@@ -106,17 +107,29 @@ function getLocationData () {
 }
 
 function displayData (location) {
+  addTripPanel()
   displayLocation(location)
-  displayCurrentWeather(location).then()
-  displayWeatherForecast(location).then()
-  unhideDataSection()
-  displayImage(location).then()
-  unhideImageSection()
+  // displayCurrentWeather(location).then()
+  // displayWeatherForecast(location).then()
+  // unhideDataSection()
+  // displayImage(location).then()
+  // unhideImageSection()
+  tripIndex++
+}
+
+function addTripPanel () {
+  const template = document.getElementById('trip-tmpl')
+  const clone = template.content.cloneNode(true)
+  const ids = clone.querySelectorAll('[id]')
+  ids.forEach((id) => {
+    clone.getElementById(id.id).id = `${id.id}${tripIndex}`
+  })
+  document.getElementById('trips').appendChild(clone)
 }
 
 function displayLocation (location) {
-  document.getElementById('city').innerText = `${location.name},`
-  document.getElementById('country').innerText = ` ${location.countryName}`
+  document.getElementById(`city-${tripIndex}`).innerText = `${location.name},`
+  document.getElementById(`country-${tripIndex}`).innerText = ` ${location.countryName}`
 }
 
 function displayCurrentWeather (location) {
