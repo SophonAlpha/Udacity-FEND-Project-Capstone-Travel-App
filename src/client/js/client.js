@@ -8,7 +8,7 @@ import { DateTime } from 'luxon'
 import fetch from 'node-fetch'
 
 let inputTimeOutId
-let tripIndex = 11
+let tripIndex = 0
 const inputTimeOut = 100
 const locationOptions = {}
 
@@ -62,9 +62,7 @@ document.getElementById('date').min = currDate.toISODate()
 document.getElementById('date').value = currDate.toISODate()
 
 function locationTextChanged () {
-  // Hide the data and image sections. Remove the error message.
-  document.getElementById('data-section').classList.add('display-none')
-  document.getElementById('image-section').classList.add('display-none')
+  // Remove the error message.
   document.getElementById('error-msg').classList.add('visibility-hidden')
   // Get a list of suggestions for locations.
   const qStr = {
@@ -108,13 +106,20 @@ function getLocationData () {
 
 function displayData (location) {
   addTripPanel()
-  displayLocation(location)
-  // displayCurrentWeather(location).then()
-  // displayWeatherForecast(location).then()
+  displayTripHeader(location)
+  Promise.all([
+    displayCurrentWeather(location),
+    displayWeatherForecast(location),
+    displayImage(location)
+  ])
+    .then(() => {
+      tripIndex++
+    })
+    .catch((err) => {
+      console.error(err)
+    })
   // unhideDataSection()
-  // displayImage(location).then()
   // unhideImageSection()
-  tripIndex++
 }
 
 function addTripPanel () {
@@ -125,11 +130,38 @@ function addTripPanel () {
     clone.getElementById(id.id).id = `${id.id}${tripIndex}`
   })
   document.getElementById('trips').appendChild(clone)
+  addRemoveEventHandler()
 }
 
-function displayLocation (location) {
+function addRemoveEventHandler () {
+  document.getElementById(`remove-${tripIndex}`)
+    .addEventListener('click', function (event) {
+      const tripId = event.target.id.replace('remove-', 'trip-')
+      document.getElementById(tripId).remove()
+    })
+}
+
+function displayTripHeader (location) {
   document.getElementById(`city-${tripIndex}`).innerText = `${location.name},`
+  document.getElementById(`city2-${tripIndex}`).innerText = `${location.name},`
   document.getElementById(`country-${tripIndex}`).innerText = ` ${location.countryName}`
+  document.getElementById(`country2-${tripIndex}`).innerText = ` ${location.countryName}`
+  const diffDays = daysToTrip()
+  document.getElementById(`days-to-trip-${tripIndex}`)
+    .innerText = `${diffDays} ${diffDays === 1 ? 'day' : 'days'}`
+}
+
+function daysToTrip () {
+  const departureDate = DateTime.fromISO(document.getElementById('date').value)
+  document.getElementById(`departure-time-${tripIndex}`)
+    .innerText = departureDate.toLocaleString(DateTime.DATE_FULL)
+  const currTime = DateTime.now()
+  const timeNow = DateTime.fromObject({
+    year: currTime.year,
+    month: currTime.month,
+    day: currTime.day
+  })
+  return Math.round(departureDate.diff(timeNow, 'days').toObject().days)
 }
 
 function displayCurrentWeather (location) {
@@ -149,33 +181,33 @@ function displayCurrentWeather (location) {
 
 function updateCurrentWeather (location, currentWeather) {
   const currTime = DateTime.now().setZone(currentWeather.data[0].timezone)
-  document.getElementById('current-time')
+  document.getElementById(`current-time-${tripIndex}`)
     .innerText = currTime.toFormat('T')
-  document.getElementById('tz')
+  document.getElementById(`tz-${tripIndex}`)
     .innerText = `(${currTime.toFormat('ZZZZ')})`
-  document.getElementById('current-day-icon')
+  document.getElementById(`current-day-icon-${tripIndex}`)
     .setAttribute('class', `wi wi-xx-large icon wi-owm-${currentWeather.data[0].weather.code}`)
-  document.getElementById('weather-description')
+  document.getElementById(`weather-description-${tripIndex}`)
     .innerText = currentWeather.data[0].weather.description
-  document.getElementById('temp').innerText = `${currentWeather.data[0].temp}`
-  document.getElementById('wind-speed')
+  document.getElementById(`temp-${tripIndex}`).innerText = `${currentWeather.data[0].temp}`
+  document.getElementById(`wind-speed-${tripIndex}`)
     .innerText = currentWeather.data[0].wind_spd.toFixed(1)
-  document.getElementById('wind-direction')
+  document.getElementById(`wind-direction-${tripIndex}`)
     .innerText = currentWeather.data[0].wind_cdir_full
-  document.getElementById('aqi')
+  document.getElementById(`aqi-${tripIndex}`)
     .innerText = currentWeather.data[0].aqi
-  document.getElementById('relative-humidity')
+  document.getElementById(`relative-humidity-${tripIndex}`)
     .innerText = currentWeather.data[0].rh.toFixed(0)
-  document.getElementById('pressure')
+  document.getElementById(`pressure-${tripIndex}`)
     .innerText = currentWeather.data[0].pres.toFixed(0)
-  document.getElementById('sunrise')
+  document.getElementById(`sunrise-${tripIndex}`)
     .innerText = DateTime.fromISO(currentWeather.data[0].sunrise, { zone: 'utc' })
-      .setZone(currentWeather.data[0].timezone)
-      .toFormat('T')
-  document.getElementById('sunset')
+    .setZone(currentWeather.data[0].timezone)
+    .toFormat('T')
+  document.getElementById(`sunset-${tripIndex}`)
     .innerText = DateTime.fromISO(currentWeather.data[0].sunset, { zone: 'utc' })
-      .setZone(currentWeather.data[0].timezone)
-      .toFormat('T')
+    .setZone(currentWeather.data[0].timezone)
+    .toFormat('T')
 }
 
 function displayWeatherForecast (location) {
@@ -195,23 +227,36 @@ function displayWeatherForecast (location) {
 
 function updateWeatherForecast (weatherForecast) {
   for (let i = 0; i < 7; i++) {
-    document.getElementById(`day-${i}`)
+    const template = getDayForecastTempl(i)
+    // Fill in the weather values for the day.
+    template.getElementById(`day-${i}-${tripIndex}`)
       .innerText = DateTime.fromISO(weatherForecast.data[i].datetime).toFormat('ccc')
-    // TODO: double check whether correct icons are displayed
-    // TODO: check html layout when displaying New York
-    document.getElementById(`day-${i}-icon`)
+    if (i > 0) {
+      template.getElementById(`day-${i}-icon-border-${tripIndex}`).classList.add('border-l')
+    }
+    template.getElementById(`day-${i}-icon-${tripIndex}`)
       .setAttribute('class', `wi forc-icons wi-owm-${weatherForecast.data[i].weather.code}`)
-    document.getElementById(`day-${i}-low_temp`)
+    template.getElementById(`day-${i}-low_temp-${tripIndex}`)
       .innerText = weatherForecast.data[i].low_temp.toFixed(0)
-    document.getElementById(`day-${i}-max_temp`)
+    template.getElementById(`day-${i}-max_temp-${tripIndex}`)
       .innerText = weatherForecast.data[i].max_temp.toFixed(0)
-    document.getElementById(`day-${i}-temp`)
+    template.getElementById(`day-${i}-temp-${tripIndex}`)
       .innerText = weatherForecast.data[i].temp.toFixed(0)
+    // Append to DOM.
+    document.getElementById(`forecast-${tripIndex}`).appendChild(template)
   }
 }
 
-function unhideDataSection () {
-  document.getElementById('data-section').classList.remove('display-none')
+function getDayForecastTempl (i) {
+  const template = document.getElementById('forecast-tmpl')
+  const clone = template.content.cloneNode(true)
+  const ids = clone.querySelectorAll('[id]')
+  let newId
+  ids.forEach((id) => {
+    newId = id.id.replace('{weekday}', `${i}`).replace('{trip}', `${tripIndex}`)
+    clone.getElementById(id.id).id = newId
+  })
+  return clone
 }
 
 async function displayImage (location) {
@@ -221,8 +266,9 @@ async function displayImage (location) {
     { query: `${location.countryName}` }
   ]
   let imgFound = false
+  let qStr
   while (queries.length > 0) {
-    const qStr = queries.shift()
+    qStr = queries.shift()
     const locationImage = await fetch('/locationImage?' + new URLSearchParams(qStr))
       .then(response => response.json())
       .catch((err) => {
@@ -235,18 +281,14 @@ async function displayImage (location) {
     }
   }
   if (!imgFound) {
-    // TODO: No image found. Hide the image panel.
+    console.error(`No image found for ${qStr}`)
   }
 }
 
 function updateLocationImage (locationImage) {
-  document.getElementById('img-box')
+  document.getElementById(`img-box-${tripIndex}`)
     .style.backgroundImage = `url("${locationImage.hits[0].webformatURL}")`
-  document.getElementById('img-credit')
+  document.getElementById(`img-credit-${tripIndex}`)
     .href = `https://pixabay.com/users/${locationImage.hits[0].user}-${locationImage.hits[0].user_id}/`
-  document.getElementById('img-credit').innerText = locationImage.hits[0].user
-}
-
-function unhideImageSection () {
-  document.getElementById('image-section').classList.remove('display-none')
+  document.getElementById(`img-credit-${tripIndex}`).innerText = locationImage.hits[0].user
 }

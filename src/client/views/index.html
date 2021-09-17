@@ -45,10 +45,10 @@
             <!-- Row 1 -->
             <div class="fc-row ma-l10 ma-r10 ma-t20 ma-b10">
               <!-- location data -->
-              <div class="fc-col fi-grow-1">
-                <p class="ma-b10">My trip to: <span id="city-">Erfurt, </span><span id="country-">Germany</span></p>
-                <p class="ma-b10">Departing: 12/09/2021</p>
-                <p class="ma-b10">The trip to Erfurt, Germany is x days away.</p>
+              <div class="fc-col fi-grow-1 light-font">
+                <p class="ma-b10"><span class="default-font">My trip to: </span><span id="city-">---, </span><span id="country-">---</span></p>
+                <p class="ma-b10"><span class="default-font">Departing: </span><span id="departure-time-">--/--/----</span></p>
+                <p class="ma-b10">The trip to <span id="city2-">---, </span><span id="country2-">---</span> is <span id="days-to-trip-">--- days</span> away.</p>
               </div>
               <!-- remove button -->
               <div class="fc-col ju-center ma-l10 fi-grow-1">
@@ -66,11 +66,11 @@
                 <!-- Section title, time, timezone -->
                 <div class="fc-row ma-t10">
                   <div class="fc-col fi-grow-1">
-                    <p>Today's weather:</p>
+                    <p class="light-font">TODAY'S WEATHER:</p>
                   </div>
                   <div class="fc-col fi-grow-1">
                     <div class="fc-row ju-end">
-                      <span id="current-time-" class="time">23:35</span>
+                      <span id="current-time-" class="time">--:--</span>
                     </div>
                     <div class="fc-row ju-end">
                       <span class="tz">Local time <span id="tz-">---</span></span>
@@ -81,38 +81,38 @@
                 <div class="fc-row ma-t10">
                   <div class="fc-col ma-r10">
                     <div class="fc-row ju-center">
-                      <span class="temp"><span id="temp-">23</span>&deg;C</span>
+                      <span class="temp"><span id="temp-">--</span>&deg;C</span>
                     </div>
                     <div class="fc-row ju-center pad-icon">
-                      <i id="current-day-icon-" class="wi wi-xx-large icon wi-owm-200"></i>
+                      <i id="current-day-icon-"></i>
                     </div>
                     <div class="fc-row ju-center">
                       <p class="value txt-center"><span
-                        id="weather-description-">Thunderstorm with light rain</span></p>
+                        id="weather-description-">---</span></p>
                     </div>
                   </div>
                   <div class="fc-col pad-t20">
-
                   </div>
-                  <div class="fc-col left-line">
+                  <div class="fc-col ju-center left-line">
                     <div class="fc-col ma-l20">
-                      <p class="value">wind speed: <span id="wind-speed-">---</span> m/s</p>
-                      <p class="value">wind direction: <span id="wind-direction-">---</span></p>
+                      <p class="value">Wind speed: <span id="wind-speed-">---</span> m/s</p>
+                      <p class="value">Wind direction: <span id="wind-direction-">---</span></p>
                       <p class="value">AQI: <span id="aqi-">---</span></p>
-                      <p class="value">rel. humidity: <span id="relative-humidity-">---</span> %
+                      <p class="value">Rel. humidity: <span id="relative-humidity-">---</span> %
                       </p>
-                      <p class="value">pressure: <span id="pressure-">---</span> mb</p>
-                      <p class="value">sunrise: <span id="sunrise-">---</span></p>
-                      <p class="value">sunset: <span id="sunset-">---</span></p>
+                      <p class="value">Pressure: <span id="pressure-">---</span> mb</p>
+                      <p class="value">Sunrise: <span id="sunrise-">---</span></p>
+                      <p class="value">Sunset: <span id="sunset-">---</span></p>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="fc-col fi-grow-1 im-box-min-space img-box ma-l10">
+              <!-- Location image -->
+              <div id="img-box-" class="fc-col fi-grow-1 im-box-min-space img-box ma-l10">
                 <div class="fc-row ju-end">
                   <div class="fc-col">
                     <p class="img-credit">Image by
-                      <a id="img-credit-">Blah blah test text</a> from
+                      <a id="img-credit-">---</a> from
                       <a href="https://pixabay.com">Pixabay</a>
                     </p>
                   </div>
@@ -124,134 +124,13 @@
             <div class="fc-row ma-l10 ma-r10 ma-b10 top-line">
               <div class="fc-col fi-grow-1 ma-t10">
                 <div class="fc-row">
-                  <p>Weather forecast:</p>
+                  <p class="light-font">WEATHER FORECAST:</p>
                 </div>
                 <!-- forecast -->
-                <div id="forecast-" class="fc-row ma-t10">
-
-<!--                  &lt;!&ndash; One day forecast &ndash;&gt;-->
-<!--                  <div class="fi-grow-1 fc-col">-->
-<!--                    <div class="fc-row ju-center">-->
-<!--                      <span id="day-0-1" class="forc-text">-&#45;&#45;</span>-->
-<!--                    </div>-->
-<!--                    <div class="fc-row ju-center">-->
-<!--                      <i id="day-0-icon-1"></i>-->
-<!--                    </div>-->
-<!--                    <div class="fc-row ju-center">-->
-<!--                    <span class="forc-text">-->
-<!--                      <span class="temp-range"><span id="day-0-low_temp-1">&#45;&#45;</span>&deg; - <span-->
-<!--                        id="day-0-max_temp-1">&#45;&#45;</span>&deg;</span>-->
-<!--                      <span class="temp-single"><span id="day-0-temp-1">&#45;&#45;</span>&deg;</span>-->
-<!--                    </span>-->
-<!--                    </div>-->
-<!--                  </div>-->
-
-<!--                  &lt;!&ndash; One day forecast &ndash;&gt;-->
-<!--                  <div class="fi-grow-1 fc-col">-->
-<!--                    <div class="fc-row ju-center border-l">-->
-<!--                      <span id="day-1-1" class="forc-text">-&#45;&#45;</span>-->
-<!--                    </div>-->
-<!--                    <div class="fc-row ju-center">-->
-<!--                      <i id="day-1-icon-1"></i>-->
-<!--                    </div>-->
-<!--                    <div class="fc-row ju-center">-->
-<!--                    <span class="forc-text">-->
-<!--                      <span class="temp-range"><span id="day-1-low_temp-1">&#45;&#45;</span>&deg; - <span-->
-<!--                        id="day-1-max_temp-1">&#45;&#45;</span>&deg;</span>-->
-<!--                      <span class="temp-single"><span id="day-1-temp-1">&#45;&#45;</span>&deg;</span>-->
-<!--                    </span>-->
-<!--                    </div>-->
-<!--                  </div>-->
-
-<!--                  &lt;!&ndash; One day forecast &ndash;&gt;-->
-<!--                  <div class="fi-grow-1 fc-col">-->
-<!--                    <div class="fc-row ju-center border-l">-->
-<!--                      <span id="day-2-1" class="forc-text">-&#45;&#45;</span>-->
-<!--                    </div>-->
-<!--                    <div class="fc-row ju-center">-->
-<!--                      <i id="day-2-icon-1"></i>-->
-<!--                    </div>-->
-<!--                    <div class="fc-row ju-center">-->
-<!--                    <span class="forc-text">-->
-<!--                      <span class="temp-range"><span id="day-2-low_temp-1">&#45;&#45;</span>&deg; - <span-->
-<!--                        id="day-2-max_temp-1">&#45;&#45;</span>&deg;</span>-->
-<!--                      <span class="temp-single"><span id="day-2-temp-1">&#45;&#45;</span>&deg;</span>-->
-<!--                    </span>-->
-<!--                    </div>-->
-<!--                  </div>-->
-
-<!--                  &lt;!&ndash; One day forecast &ndash;&gt;-->
-<!--                  <div class="fi-grow-1 fc-col">-->
-<!--                    <div class="fc-row ju-center border-l">-->
-<!--                      <span id="day-3-1" class="forc-text">-&#45;&#45;</span>-->
-<!--                    </div>-->
-<!--                    <div class="fc-row ju-center">-->
-<!--                      <i id="day-3-icon-1"></i>-->
-<!--                    </div>-->
-<!--                    <div class="fc-row ju-center">-->
-<!--                    <span class="forc-text">-->
-<!--                      <span class="temp-range"><span id="day-3-low_temp-1">&#45;&#45;</span>&deg; - <span-->
-<!--                        id="day-3-max_temp-1">&#45;&#45;</span>&deg;</span>-->
-<!--                      <span class="temp-single"><span id="day-3-temp-1">&#45;&#45;</span>&deg;</span>-->
-<!--                    </span>-->
-<!--                    </div>-->
-<!--                  </div>-->
-
-<!--                  &lt;!&ndash; One day forecast &ndash;&gt;-->
-<!--                  <div class="fi-grow-1 fc-col">-->
-<!--                    <div class="fc-row ju-center border-l">-->
-<!--                      <span id="day-4-1" class="forc-text">-&#45;&#45;</span>-->
-<!--                    </div>-->
-<!--                    <div class="fc-row ju-center">-->
-<!--                      <i id="day-4-icon-1"></i>-->
-<!--                    </div>-->
-<!--                    <div class="fc-row ju-center">-->
-<!--                    <span class="forc-text">-->
-<!--                      <span class="temp-range"><span id="day-4-low_temp-1">&#45;&#45;</span>&deg; - <span-->
-<!--                        id="day-4-max_temp-1">&#45;&#45;</span>&deg;</span>-->
-<!--                      <span class="temp-single"><span id="day-4-temp-1">&#45;&#45;</span>&deg;</span>-->
-<!--                    </span>-->
-<!--                    </div>-->
-<!--                  </div>-->
-
-<!--                  &lt;!&ndash; One day forecast &ndash;&gt;-->
-<!--                  <div class="fi-grow-1 fc-col">-->
-<!--                    <div class="fc-row ju-center border-l">-->
-<!--                      <span id="day-5-1" class="forc-text">-&#45;&#45;</span>-->
-<!--                    </div>-->
-<!--                    <div class="fc-row ju-center">-->
-<!--                      <i id="day-5-icon-1"></i>-->
-<!--                    </div>-->
-<!--                    <div class="fc-row ju-center">-->
-<!--                    <span class="forc-text">-->
-<!--                      <span class="temp-range"><span id="day-5-low_temp-1">&#45;&#45;</span>&deg; - <span-->
-<!--                        id="day-5-max_temp-1">&#45;&#45;</span>&deg;</span>-->
-<!--                      <span class="temp-single"><span id="day-5-temp-1">&#45;&#45;</span>&deg;</span>-->
-<!--                    </span>-->
-<!--                    </div>-->
-<!--                  </div>-->
-
-<!--                  &lt;!&ndash; One day forecast &ndash;&gt;-->
-<!--                  <div class="fi-grow-1 fc-col">-->
-<!--                    <div class="fc-row ju-center border-l">-->
-<!--                      <span id="day-6-1" class="forc-text">-&#45;&#45;</span>-->
-<!--                    </div>-->
-<!--                    <div class="fc-row ju-center">-->
-<!--                      <i id="day-6-icon-1"></i>-->
-<!--                    </div>-->
-<!--                    <div class="fc-row ju-center">-->
-<!--                    <span class="forc-text">-->
-<!--                      <span class="temp-range"><span id="day-6-low_temp-1">&#45;&#45;</span>&deg; - <span-->
-<!--                        id="day-6-max_temp-1">&#45;&#45;</span>&deg;</span>-->
-<!--                      <span class="temp-single"><span id="day-6-temp-1">&#45;&#45;</span>&deg;</span>-->
-<!--                    </span>-->
-<!--                    </div>-->
-<!--                  </div>-->
-
-                </div>
-
+                <div id="forecast-" class="fc-row ma-t10"></div>
               </div>
             </div>
+
           </div>
         </div>
       </template>
@@ -259,17 +138,20 @@
       <template id="forecast-tmpl">
         <!-- One day forecast -->
         <div class="fi-grow-1 fc-col">
+          <!-- Weekday -->
           <div class="fc-row ju-center">
-            <span id="day-x-y" class="forc-text">---</span>
+            <span id="day-{weekday}-{trip}" class="forc-text">---</span>
           </div>
-          <div class="fc-row ju-center">
-            <i id="day-x-icon-y"></i>
+          <!-- Weather icon -->
+          <div id="day-{weekday}-icon-border-{trip}" class="fc-row ju-center">
+            <i id="day-{weekday}-icon-{trip}"></i>
           </div>
+          <!-- Temperature -->
           <div class="fc-row ju-center">
             <span class="forc-text">
-              <span class="temp-range"><span id="day-x-low_temp-y">--</span>&deg; - <span
-                id="day-x-max_temp-y">--</span>&deg;</span>
-              <span class="temp-single"><span id="day-x-temp-y">--</span>&deg;</span>
+              <span class="temp-range"><span id="day-{weekday}-low_temp-{trip}">--</span>&deg; - <span
+                id="day-{weekday}-max_temp-{trip}">--</span>&deg;</span>
+              <span class="temp-single"><span id="day-{weekday}-temp-{trip}">--</span>&deg;</span>
             </span>
           </div>
         </div>
@@ -280,20 +162,20 @@
     <!--
     ########## Input section ##########
     -->
-    <div class="fc-col ma-t10 ma-b50">
+    <div class="fc-col ma-b50">
 
       <div class="fc-row ju-center bkg-col-field-drab">
         <div class="fc-col">
 
           <!-- Error message -->
-          <p id="error-msg" class="error ma-t30 ma-b10">Unfortunately, I don’t know this place.
+          <p id="error-msg" class="error ma-t30 ma-b10 visibility-hidden">Unfortunately, I don’t know this place.
             Please choose another location.</p>
 
           <!-- Input location -->
           <div class="fc-row ma-b10">
             <div>
               <label class="input-label">My trip to: </label>
-              <input id="location" type="text" list="suggestions" class="input"
+              <input id="location" type="text" list="suggestions" class="input" size="35"
                      placeholder="enter location">
               <datalist id="suggestions" open="open">
                 <option value="Erfurt">
