@@ -7,18 +7,120 @@ import '../styles/colors.scss'
 import { DateTime } from 'luxon'
 import fetch from 'node-fetch'
 
-let tripsData
-let tripElement
 let inputTimeOutId
-let tripIndex = 0
 const inputTimeOut = 100
 const locationOptions = {}
 
+// class Store {
+//   constructor () {
+//     this.trips = {}
+//     this.tripIndex = 0
+//   }
+//
+//   getTrips () {
+//     return this.trips
+//   }
+//
+//   add (data) {
+//     this.trips[this.tripIndex] = data
+//     const itemIndex = this.tripIndex
+//     this.nextIndex()
+//     this.save()
+//     return itemIndex
+//   }
+//
+//   remove (index) {
+//     delete this.trips[index]
+//     this.save()
+//   }
+//
+//   save () {
+//     // eslint-disable-next-line no-undef
+//     localStorage.setItem('yourTravelPlanner', JSON.stringify(this.trips))
+//   }
+//
+//   load () {
+//     // eslint-disable-next-line no-undef
+//     this.trips = JSON.parse(localStorage.getItem('yourTravelPlanner'))
+//     if (this.trips == null) {
+//       this.trips = {}
+//     }
+//   }
+//
+//   nextIndex () {
+//     while (Object.keys(this.trips).indexOf(this.tripIndex.toString()) >= 0) {
+//       this.tripIndex++
+//     }
+//   }
+// }
+
+class Trips {
+  constructor () {
+    this.trips = {}
+    this.tripIndex = 0
+    this.loadFromStorage()
+  }
+
+  add (location, departureDate) {
+    const tripObj = new Trip(this.tripIndex, location, departureDate)
+    this.addRemoveEventHandler(this.tripIndex)
+    this.trips[this.tripIndex] = {
+      location: location,
+      departureDate: departureDate,
+      tripObj: tripObj
+    }
+    this.saveToStorage()
+    this.nextIndex()
+  }
+
+  addRemoveEventHandler (index) {
+    document.getElementById(`remove-${index}`)
+      .addEventListener('click',
+        (event) => {
+          this.remove(parseInt(event.target.id.replace('remove-', '')))
+        }
+      )
+  }
+
+  nextIndex () {
+    while (Object.keys(this.trips).indexOf(this.tripIndex.toString()) >= 0) {
+      this.tripIndex++
+    }
+  }
+
+  remove (index) {
+    // Remove from list, storage and DOM.
+    document.getElementById(`trip-${index}`).remove()
+    delete this.trips[index]
+    this.saveToStorage()
+  }
+
+  saveToStorage () {
+    // eslint-disable-next-line no-undef
+    localStorage.setItem('yourTravelPlanner', JSON.stringify(this.trips))
+  }
+
+  loadFromStorage () {
+    // eslint-disable-next-line no-undef
+    this.trips = JSON.parse(localStorage.getItem('yourTravelPlanner'))
+    if (this.trips == null) {
+      this.trips = {}
+    }
+    Object.keys(this.trips).forEach((tripIndex) => {
+      this.add(
+        this.trips[tripIndex].location,
+        this.trips[tripIndex].departureDate
+      )
+    })
+  }
+}
+
 class Trip {
-  constructor (tripNo, location, departureDate) {
-    this.tripNo = tripNo
+  constructor (index, location, departureDate) {
+    this.tripIndex = index
     this.location = location
     this.departureDate = departureDate
+    this.display()
   }
 
   display () {
@@ -34,31 +136,21 @@ class Trip {
     const clone = template.content.cloneNode(true)
     const ids = clone.querySelectorAll('[id]')
     ids.forEach((id) => {
-      clone.getElementById(id.id).id = `${id.id}${this.tripNo}`
+      clone.getElementById(id.id).id = `${id.id}${this.tripIndex}`
     })
     document.getElementById('trips').appendChild(clone)
-    this.addRemoveEventHandler()
-  }
-
-  addRemoveEventHandler () {
-    document.getElementById(`remove-${this.tripNo}`)
-      .addEventListener('click', function (event) {
-        const tripIdx = parseInt(event.target.id.replace('remove-', ''))
-        const tripId = `trip-${tripIdx}`
-        document.getElementById(tripId).remove()
-        removeLocal(tripIdx)
-      })
+    // this.addRemoveEventHandler()
   }
 
   displayTripHeader () {
-    document.getElementById(`city-${this.tripNo}`).innerText = `${this.location.name},`
-    document.getElementById(`city2-${this.tripNo}`).innerText = `${this.location.name},`
-    document.getElementById(`country-${this.tripNo}`).innerText = ` ${this.location.countryName}`
-    document.getElementById(`country2-${this.tripNo}`).innerText = ` ${this.location.countryName}`
-    document.getElementById(`departure-time-${this.tripNo}`)
+    document.getElementById(`city-${this.tripIndex}`).innerText = `${this.location.name},`
+    document.getElementById(`city2-${this.tripIndex}`).innerText = `${this.location.name},`
+    document.getElementById(`country-${this.tripIndex}`).innerText = ` ${this.location.countryName}`
+    document.getElementById(`country2-${this.tripIndex}`).innerText = ` ${this.location.countryName}`
+    document.getElementById(`departure-time-${this.tripIndex}`)
       .innerText = DateTime.fromISO(this.departureDate).toLocaleString(DateTime.DATE_FULL)
     const diffDays = this.daysToTrip()
-    document.getElementById(`days-to-trip-${this.tripNo}`)
+    document.getElementById(`days-to-trip-${this.tripIndex}`)
       .innerText = `${diffDays} ${diffDays === 1 ? 'day' : 'days'}`
   }
 
@@ -90,31 +182,31 @@ class Trip {
 
   updateCurrentWeather (currentWeather) {
     const currTime = DateTime.now().setZone(currentWeather.data[0].timezone)
-    document.getElementById(`current-time-${this.tripNo}`)
+    document.getElementById(`current-time-${this.tripIndex}`)
       .innerText = currTime.toFormat('T')
-    document.getElementById(`tz-${this.tripNo}`)
+    document.getElementById(`tz-${this.tripIndex}`)
       .innerText = `(${currTime.toFormat('ZZZZ')})`
-    document.getElementById(`current-day-icon-${this.tripNo}`)
+    document.getElementById(`current-day-icon-${this.tripIndex}`)
       .setAttribute('class', `wi wi-xx-large icon wi-owm-${currentWeather.data[0].weather.code}`)
-    document.getElementById(`weather-description-${this.tripNo}`)
+    document.getElementById(`weather-description-${this.tripIndex}`)
       .innerText = currentWeather.data[0].weather.description
-    document.getElementById(`temp-${this.tripNo}`).innerText = `${currentWeather.data[0].temp}`
-    document.getElementById(`wind-speed-${this.tripNo}`)
+    document.getElementById(`temp-${this.tripIndex}`).innerText = `${currentWeather.data[0].temp}`
+    document.getElementById(`wind-speed-${this.tripIndex}`)
       .innerText = currentWeather.data[0].wind_spd.toFixed(1)
-    document.getElementById(`wind-direction-${this.tripNo}`)
+    document.getElementById(`wind-direction-${this.tripIndex}`)
       .innerText = currentWeather.data[0].wind_cdir_full
-    document.getElementById(`aqi-${this.tripNo}`)
+    document.getElementById(`aqi-${this.tripIndex}`)
       .innerText = currentWeather.data[0].aqi
-    document.getElementById(`relative-humidity-${this.tripNo}`)
+    document.getElementById(`relative-humidity-${this.tripIndex}`)
       .innerText = currentWeather.data[0].rh.toFixed(0)
-    document.getElementById(`pressure-${this.tripNo}`)
+    document.getElementById(`pressure-${this.tripIndex}`)
       .innerText = currentWeather.data[0].pres.toFixed(0)
     document.getElementById(
-      `sunrise-${this.tripNo}`).innerText = DateTime.fromISO(
+      `sunrise-${this.tripIndex}`).innerText = DateTime.fromISO(
       currentWeather.data[0].sunrise, { zone: 'utc' }
     ).setZone(currentWeather.data[0].timezone).toFormat('T')
     document.getElementById(
-      `sunset-${this.tripNo}`).innerText = DateTime.fromISO(
+      `sunset-${this.tripIndex}`).innerText = DateTime.fromISO(
       currentWeather.data[0].sunset, { zone: 'utc' }
     ).setZone(currentWeather.data[0].timezone).toFormat('T')
   }
@@ -138,21 +230,21 @@ class Trip {
     for (let i = 0; i < 7; i++) {
       const template = this.getDayForecastTempl(i)
       // Fill in the weather values for the day.
-      template.getElementById(`day-${i}-${this.tripNo}`)
+      template.getElementById(`day-${i}-${this.tripIndex}`)
         .innerText = DateTime.fromISO(weatherForecast.data[i].datetime).toFormat('ccc')
       if (i > 0) {
-        template.getElementById(`day-${i}-icon-border-${this.tripNo}`).classList.add('border-l')
+        template.getElementById(`day-${i}-icon-border-${this.tripIndex}`).classList.add('border-l')
       }
-      template.getElementById(`day-${i}-icon-${this.tripNo}`)
+      template.getElementById(`day-${i}-icon-${this.tripIndex}`)
         .setAttribute('class', `wi forc-icons wi-owm-${weatherForecast.data[i].weather.code}`)
-      template.getElementById(`day-${i}-low_temp-${this.tripNo}`)
+      template.getElementById(`day-${i}-low_temp-${this.tripIndex}`)
         .innerText = weatherForecast.data[i].low_temp.toFixed(0)
-      template.getElementById(`day-${i}-max_temp-${this.tripNo}`)
+      template.getElementById(`day-${i}-max_temp-${this.tripIndex}`)
         .innerText = weatherForecast.data[i].max_temp.toFixed(0)
-      template.getElementById(`day-${i}-temp-${this.tripNo}`)
+      template.getElementById(`day-${i}-temp-${this.tripIndex}`)
         .innerText = weatherForecast.data[i].temp.toFixed(0)
       // Append to DOM.
-      document.getElementById(`forecast-${this.tripNo}`).appendChild(template)
+      document.getElementById(`forecast-${this.tripIndex}`).appendChild(template)
     }
   }
 
@@ -162,7 +254,7 @@ class Trip {
     const ids = clone.querySelectorAll('[id]')
     let newId
     ids.forEach((id) => {
-      newId = id.id.replace('{weekday}', `${dayIndex}`).replace('{trip}', `${this.tripNo}`)
+      newId = id.id.replace('{weekday}', `${dayIndex}`).replace('{trip}', `${this.tripIndex}`)
       clone.getElementById(id.id).id = newId
     })
     return clone
@@ -195,11 +287,11 @@ class Trip {
   }
 
   updateLocationImage (locationImage) {
-    document.getElementById(`img-box-${this.tripNo}`)
+    document.getElementById(`img-box-${this.tripIndex}`)
       .style.backgroundImage = `url("${locationImage.hits[0].webformatURL}")`
-    document.getElementById(`img-credit-${this.tripNo}`)
+    document.getElementById(`img-credit-${this.tripIndex}`)
       .href = `https://pixabay.com/users/${locationImage.hits[0].user}-${locationImage.hits[0].user_id}/`
-    document.getElementById(`img-credit-${this.tripNo}`).innerText = locationImage.hits[0].user
+    document.getElementById(`img-credit-${this.tripIndex}`).innerText = locationImage.hits[0].user
   }
 }
 
@@ -229,6 +321,9 @@ document.getElementById('location').addEventListener('input', function (event) {
   inputTimeOutId = setTimeout(locationTextChanged, inputTimeOut)
 })
 
+// Initialize list of trips. Object creation will load and display any previously stored trips.
+const travelTrips = new Trips()
+
 // click on submit button
 document.getElementById('submit').addEventListener('click', async function (event) {
   const departureDate = document.getElementById('date').value
@@ -241,10 +336,7 @@ document.getElementById('submit').addEventListener('click', async function (even
   if (typeof location === 'undefined') {
     document.getElementById('error-msg').classList.remove('visibility-hidden')
   } else {
-    storeLocal(tripIndex, location, departureDate)
-    tripElement = new Trip(tripIndex, location, departureDate)
-    tripElement.display()
-    tripIndex++
+    travelTrips.add(location, departureDate)
   }
 })
 
@@ -252,26 +344,6 @@ document.getElementById('submit').addEventListener('click', async function (even
 const currDate = DateTime.now()
 document.getElementById('date').min = currDate.toISODate()
 document.getElementById('date').value = currDate.toISODate()
-
-// Retrieve and display trips stored locally
-displayLocallyStoredTrips()
-
-function displayLocallyStoredTrips () {
-  tripsData = JSON.parse(localStorage.getItem('yourTravelPlanner'))
-  console.log('tripsData')
-  console.log(tripsData)
-  if (tripsData != null) {
-    let trip
-    tripsData.keys().forEach((key) => {
-      trip = tripsData[key]
-      tripElement = new Trip(tripIndex, trip.location, trip.departureDate)
-      tripElement.display()
-      tripIndex++
-    })
-  } else {
-    tripsData = {}
-  }
-}
 
 function locationTextChanged () {
   // Remove the error message.
@@ -314,23 +386,4 @@ function getLocationData () {
     .catch((err) => {
       console.error(err)
     })
-}
-
-function storeLocal (tripIdx, location, departureDate) {
-  console.log('tripIdx, location, departureDate')
-  console.log(tripIdx, location.name, departureDate)
-  console.log('typeof tripsData')
-  console.log(typeof tripsData)
-  tripsData[tripIdx] = {
-    location: location,
-    departureDate: departureDate
-  }
-  // eslint-disable-next-line no-undef
-  localStorage.setItem('yourTravelPlanner', JSON.stringify(tripsData))
-}
-
-function removeLocal (tripIdx) {
-  delete tripsData[tripIdx]
-  // eslint-disable-next-line no-undef
-  localStorage.setItem('yourTravelPlanner', JSON.stringify(tripsData))
 }
