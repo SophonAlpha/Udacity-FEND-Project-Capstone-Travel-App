@@ -175,12 +175,12 @@
   opacity: 0.4;
 }
 
-@media screen and (max-width: 650px) {
-  .input {
-    margin-right: 0;
-    margin-bottom: 20px;
-  }
-}
+//@media screen and (max-width: 650px) {
+//  .input {
+//    margin-right: 0;
+//    margin-bottom: 20px;
+//  }
+//}
 
 .input:focus {
   outline: none;
@@ -235,44 +235,44 @@
   border-left: var(--hookers-green) 1px solid;
 }
 
-.info-container {
-  display: flex;
-  flex-direction: row;
-}
+//.info-container {
+//  display: flex;
+//  flex-direction: row;
+//}
+//
+//@media screen and (max-width: 650px) {
+//  .info-container {
+//    display: flex;
+//    flex-direction: column;
+//  }
+//}
 
-@media screen and (max-width: 650px) {
-  .info-container {
-    display: flex;
-    flex-direction: column;
-  }
-}
+//.values-container {
+//  display: flex;
+//  flex-direction: column;
+//  justify-content: center;
+//  border-left: white 1px solid;
+//}
+//
+//@media screen and (max-width: 470px) {
+//  .values-container {
+//    display: none;
+//  }
+//}
 
-.values-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border-left: white 1px solid;
-}
-
-@media screen and (max-width: 470px) {
-  .values-container {
-    display: none;
-  }
-}
-
-.image-container {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: row;
-}
-
-@media screen and (max-width: 650px) {
-  .image-container {
-    display: flex;
-    flex-direction: row;
-    height: 400px;
-  }
-}
+//.image-container {
+//  flex-grow: 1;
+//  display: flex;
+//  flex-direction: row;
+//}
+//
+//@media screen and (max-width: 650px) {
+//  .image-container {
+//    display: flex;
+//    flex-direction: row;
+//    height: 400px;
+//  }
+//}
 
 .bkg-col-midnight-green-eagle-green {
   background-color: var(--midnight-green-eagle-green);
@@ -360,19 +360,13 @@
   padding: 8px;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 500px) {
   .temp-range {
     display: none;
   }
 }
 
-@media screen and (max-width: 470px) {
-  .temp-single {
-    display: inherit;
-  }
-}
-
-@media screen and (min-width: 470px) {
+@media screen and (min-width: 501px) {
   .temp-single {
     display: none;
   }
@@ -384,9 +378,24 @@
 }
 
 .img-box {
-  //background-image: url("../img/dom-4575515_1920.jpg");
   background-size: cover;
   background-position: center;
+}
+
+.img-box-below {
+  height: 300px;
+}
+
+@media screen and (max-width: 600px) {
+  .img-box-small {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 601px) {
+  .img-box-below {
+    display: none;
+  }
 }
 
 .im-box-min-space {

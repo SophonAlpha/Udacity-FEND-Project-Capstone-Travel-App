@@ -11,49 +11,6 @@ let inputTimeOutId
 const inputTimeOut = 100
 const locationOptions = {}
 
-// class Store {
-//   constructor () {
-//     this.trips = {}
-//     this.tripIndex = 0
-//   }
-//
-//   getTrips () {
-//     return this.trips
-//   }
-//
-//   add (data) {
-//     this.trips[this.tripIndex] = data
-//     const itemIndex = this.tripIndex
-//     this.nextIndex()
-//     this.save()
-//     return itemIndex
-//   }
-//
-//   remove (index) {
-//     delete this.trips[index]
-//     this.save()
-//   }
-//
-//   save () {
-//     // eslint-disable-next-line no-undef
-//     localStorage.setItem('yourTravelPlanner', JSON.stringify(this.trips))
-//   }
-//
-//   load () {
-//     // eslint-disable-next-line no-undef
-//     this.trips = JSON.parse(localStorage.getItem('yourTravelPlanner'))
-//     if (this.trips == null) {
-//       this.trips = {}
-//     }
-//   }
-//
-//   nextIndex () {
-//     while (Object.keys(this.trips).indexOf(this.tripIndex.toString()) >= 0) {
-//       this.tripIndex++
-//     }
-//   }
-// }
-
 class Trips {
   constructor () {
     this.trips = {}
@@ -62,15 +19,17 @@ class Trips {
   }
 
   add (location, departureDate) {
-    const tripObj = new Trip(this.tripIndex, location, departureDate)
-    this.addRemoveEventHandler(this.tripIndex)
-    this.trips[this.tripIndex] = {
-      location: location,
-      departureDate: departureDate,
+    this.createTrip(this.tripIndex, location, departureDate)
+    this.nextIndex()
+  }
+
+  createTrip (tripIndex, location, departureDate) {
+    const tripObj = new Trip(tripIndex, location, departureDate)
+    this.addRemoveEventHandler(tripIndex)
+    this.trips[tripIndex] = {
       tripObj: tripObj
     }
     this.saveToStorage()
-    this.nextIndex()
   }
 
   addRemoveEventHandler (index) {
@@ -107,9 +66,10 @@ class Trips {
       this.trips = {}
     }
     Object.keys(this.trips).forEach((tripIndex) => {
-      this.add(
-        this.trips[tripIndex].location,
-        this.trips[tripIndex].departureDate
+      this.createTrip(
+        tripIndex,
+        this.trips[tripIndex].tripObj.location,
+        this.trips[tripIndex].tripObj.departureDate
       )
     })
   }
@@ -139,7 +99,6 @@ class Trip {
       clone.getElementById(id.id).id = `${id.id}${this.tripIndex}`
     })
     document.getElementById('trips').appendChild(clone)
-    // this.addRemoveEventHandler()
   }
 
   displayTripHeader () {
@@ -170,6 +129,7 @@ class Trip {
       lat: this.location.lat,
       lon: this.location.lng
     }
+    // TODO: cache api calls, see https://carmalou.com/lets-take-this-offline/2019/04/16/cache-requests-with-service-worker.html
     return fetch('/currentWeather?' + new URLSearchParams(qStr))
       .then(response => response.json())
       .then(currentWeather => {
@@ -287,11 +247,18 @@ class Trip {
   }
 
   updateLocationImage (locationImage) {
+    // Small image in 'Today's Weather' panel.
     document.getElementById(`img-box-${this.tripIndex}`)
       .style.backgroundImage = `url("${locationImage.hits[0].webformatURL}")`
     document.getElementById(`img-credit-${this.tripIndex}`)
       .href = `https://pixabay.com/users/${locationImage.hits[0].user}-${locationImage.hits[0].user_id}/`
     document.getElementById(`img-credit-${this.tripIndex}`).innerText = locationImage.hits[0].user
+    // Image below 'Weather Forecast' panel. Visible with smaller screen widths.
+    document.getElementById(`img-box-below-${this.tripIndex}`)
+      .style.backgroundImage = `url("${locationImage.hits[0].webformatURL}")`
+    document.getElementById(`img-credit-below-${this.tripIndex}`)
+      .href = `https://pixabay.com/users/${locationImage.hits[0].user}-${locationImage.hits[0].user_id}/`
+    document.getElementById(`img-credit-below-${this.tripIndex}`).innerText = locationImage.hits[0].user
   }
 }
 

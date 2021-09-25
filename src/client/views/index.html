@@ -108,7 +108,7 @@
                 </div>
               </div>
               <!-- Location image -->
-              <div id="img-box-" class="fc-col fi-grow-1 im-box-min-space img-box ma-l10">
+              <div id="img-box-" class="fc-col fi-grow-1 im-box-min-space img-box img-box-small ma-l10">
                 <div class="fc-row ju-end">
                   <div class="fc-col">
                     <p class="img-credit">Image by
@@ -128,6 +128,20 @@
                 </div>
                 <!-- forecast -->
                 <div id="forecast-" class="fc-row ma-t10"></div>
+              </div>
+            </div>
+
+            <!-- Row 4: location image for small screen widths -->
+            <div class="fc-row ma-l10 ma-r10 ma-b10">
+              <div id="img-box-below-" class="fc-col fi-grow-1 im-box-min-space img-box img-box-below">
+                <div class="fc-row ju-end">
+                  <div class="fc-col">
+                    <p class="img-credit">Image by
+                      <a id="img-credit-below-">---</a> from
+                      <a href="https://pixabay.com">Pixabay</a>
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -168,11 +182,11 @@
         <div class="fc-col">
 
           <!-- Error message -->
-          <p id="error-msg" class="error ma-t30 ma-b10 visibility-hidden">Unfortunately, I don’t know this place.
+          <p id="error-msg" class="error ma-t30 ma-l10 ma-r10 ma-b10 visibility-hidden">Unfortunately, I don’t know this place.
             Please choose another location.</p>
 
           <!-- Input location -->
-          <div class="fc-row ma-b10">
+          <div class="fc-row ma-l10 ma-r10 ma-b10">
             <div>
               <label class="input-label">My trip to: </label>
               <input id="location" type="text" list="suggestions" class="input" size="35"
@@ -190,7 +204,7 @@
           </div>
 
           <!-- Input date -->
-          <div class="fc-row ma-b10">
+          <div class="fc-row ma-l10 ma-r10 ma-b10">
             <div>
               <label class="input-label">Departing: </label>
               <input id="date" type="date" class="input">
@@ -198,7 +212,7 @@
           </div>
 
           <!-- Submit button -->
-          <div class="fc-col ma-b30">
+          <div class="fc-col ma-l10 ma-r10 ma-b30">
             <input id="submit" type="submit" class="submit" value="Let's go!">
           </div>
         </div>
