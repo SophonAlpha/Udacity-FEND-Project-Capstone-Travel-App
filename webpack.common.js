@@ -36,7 +36,9 @@ module.exports = {
       favicon: './src/client/img/favicon.ico'
     }),
     new MiniCssExtractPlugin(),
-    new WorkboxPlugin.GenerateSW({
+    new WorkboxPlugin.InjectManifest({
+      swSrc: path.join(process.cwd(), '/src/client/js/service-worker.js'),
+      swDest: 'service-worker.js',
       exclude: ['.env'],
       maximumFileSizeToCacheInBytes: 10485760
     }),
