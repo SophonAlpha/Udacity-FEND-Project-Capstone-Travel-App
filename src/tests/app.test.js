@@ -6,11 +6,12 @@ import 'regenerator-runtime/runtime'
 import fetchMock from 'jest-fetch-mock'
 
 fetchMock.enableMocks()
+const _ = require('lodash')
 const request = require('supertest')
 const path = require('path')
 const app = require(path.resolve(__dirname, '../server/app'))
 import * as testData from './app.test.data'
-import { expectedLocation } from './app.test.data'
+import { expectedLocation, testCurrentWeather } from './app.test.data'
 
 const axios = require('axios')
 jest.mock('axios')
@@ -36,22 +37,42 @@ test('GET /location', () => {
     .then(response => {
       expect(response.statusCode).toBe(200)
       const responseObj = JSON.parse(response.text)
-      // TODO: Check out Lodash _.isEqual(value, other) to simplify code below.
-      expect(responseObj[0].lng).toEqual(testData.expectedLocation.lng)
-      expect(responseObj[0].lat).toEqual(testData.expectedLocation.lat)
-      expect(responseObj[0].name).toEqual(testData.expectedLocation.name)
-      expect(responseObj[0].adminName1).toEqual(testData.expectedLocation.adminName1)
-      expect(responseObj[0].countryName).toEqual(testData.expectedLocation.countryName)
-      expect(responseObj[0].countryCode).toEqual(testData.expectedLocation.countryCode)
+      _.isEqual(responseObj[0], testData.expectedLocation)
     })
 })
 
-test('GET /analyse', async () => {
-  fetch.once(JSON.stringify(testData.testAnalyse))
-  const response = await request(app)
-    .post('/analyse')
-    .send({ text: 'dummy' })
-    .catch(err => done(err))
-  expect(response.statusCode).toBe(200)
-  expect(response.text).toContain(JSON.stringify(testData.testAnalyse))
+test('GET /currentWeather', () => {
+  axios.get.mockResolvedValue(testData.testCurrentWeather)
+  return request(app)
+    .get('/currentWeather')
+    .query({ url: 'dummy' })
+    .then(response => {
+      expect(response.statusCode).toBe(200)
+      const responseObj = JSON.parse(response.text)
+      _.isEqual(responseObj[0], testData.expectedCurrentWeather)
+    })
+})
+
+test('GET /weatherForecast', () => {
+  axios.get.mockResolvedValue(testData.testWeatherForecast)
+  return request(app)
+    .get('/weatherForecast')
+    .query({ url: 'dummy' })
+    .then(response => {
+      expect(response.statusCode).toBe(200)
+      const responseObj = JSON.parse(response.text)
+      _.isEqual(responseObj, testData.expectedWeatherForecast.data)
+    })
+})
+
+test('GET /locationImage', () => {
+  axios.get.mockResolvedValue(testData.testLocationImage)
+  return request(app)
+    .get('/locationImage')
+    .query({ url: 'dummy' })
+    .then(response => {
+      expect(response.statusCode).toBe(200)
+      const responseObj = JSON.parse(response.text)
+      _.isEqual(responseObj, testData.expectedLocationImage.data)
+    })
 })

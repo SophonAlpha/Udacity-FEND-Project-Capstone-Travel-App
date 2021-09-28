@@ -69,8 +69,6 @@ function getLocation (location, callback) {
   axios.get(url.href)
     .then(response => {
       const suggestions = []
-      console.log('/location response = ')
-      console.log(response)
       response.data.geonames.forEach((elem) => {
         suggestions.push(
           {
