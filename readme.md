@@ -6,6 +6,10 @@ user provides the URL to the article in the web form. The article content is ana
 results are shown. The project demonstrates the use of build tools such as webpack for a front end
 development.
 
+
+https://user-images.githubusercontent.com/28823321/135766839-feb2fc26-0a02-490d-bd79-29c02934a64d.mov
+
+
 <p align="center">
   <img src="doc/screenshot.png" width="400">
 </p>
