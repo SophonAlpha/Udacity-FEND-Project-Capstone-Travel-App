@@ -29,7 +29,11 @@
     -->
     <div class="fc-col ma-t100 ma-b50">
       <div class="fc-row ju-center">
-        <p class="title">Your Travel Planner</p>
+        <div class="fc-col">
+          <p class="title">Your Travel Planner</p>
+          <p class="instructions">Fancy a trip? Enter your destinations and departure dates below and
+            check what's the weather like. Enjoy!</p>
+        </div>
       </div>
     </div>
 
@@ -46,9 +50,13 @@
             <div class="fc-row ma-l10 ma-r10 ma-t20 ma-b10">
               <!-- location data -->
               <div class="fc-col fi-grow-1 light-font">
-                <p class="ma-b10"><span class="default-font">My trip to: </span><span id="city-">---, </span><span id="country-">---</span></p>
-                <p class="ma-b10"><span class="default-font">Departing: </span><span id="departure-time-">--/--/----</span></p>
-                <p class="ma-b10">The trip to <span id="city2-">---, </span><span id="country2-">---</span> is <span id="days-to-trip-">--- days</span> away.</p>
+                <p class="ma-b10"><span class="default-font">My trip to: </span><span
+                  id="city-">---</span>, <span
+                  id="country-">---</span></p>
+                <p class="ma-b10"><span class="default-font">Departing: </span><span
+                  id="departure-time-">--/--/----</span></p>
+                <p class="ma-b10">The trip to <span id="city2-">---</span>, <span
+                  id="country2-">---</span> is <span id="days-to-trip-">--- days</span> away.</p>
               </div>
               <!-- remove button -->
               <div class="fc-col ju-center ma-l10 fi-grow-1">
@@ -108,7 +116,8 @@
                 </div>
               </div>
               <!-- Location image -->
-              <div id="img-box-" class="fc-col fi-grow-1 im-box-min-space img-box img-box-small ma-l10">
+              <div id="img-box-"
+                   class="fc-col fi-grow-1 im-box-min-space img-box img-box-small ma-l10">
                 <div class="fc-row ju-end">
                   <div class="fc-col">
                     <p class="img-credit">Image by
@@ -133,7 +142,8 @@
 
             <!-- Row 4: location image for small screen widths -->
             <div class="fc-row ma-l10 ma-r10 ma-b10">
-              <div id="img-box-below-" class="fc-col fi-grow-1 im-box-min-space img-box img-box-below">
+              <div id="img-box-below-"
+                   class="fc-col fi-grow-1 im-box-min-space img-box img-box-below">
                 <div class="fc-row ju-end">
                   <div class="fc-col">
                     <p class="img-credit">Image by
@@ -163,7 +173,8 @@
           <!-- Temperature -->
           <div class="fc-row ju-center">
             <span class="forc-text">
-              <span class="temp-range"><span id="day-{weekday}-low_temp-{trip}">--</span>&deg; - <span
+              <span class="temp-range"><span
+                id="day-{weekday}-low_temp-{trip}">--</span>&deg; - <span
                 id="day-{weekday}-max_temp-{trip}">--</span>&deg;</span>
               <span class="temp-single"><span id="day-{weekday}-temp-{trip}">--</span>&deg;</span>
             </span>
@@ -179,43 +190,47 @@
     <div class="fc-col ma-b50">
 
       <div class="fc-row ju-center bkg-col-field-drab">
-        <div class="fc-col">
+        <form>
+          <div class="fc-col">
 
-          <!-- Error message -->
-          <p id="error-msg" class="error ma-t30 ma-l10 ma-r10 ma-b10 visibility-hidden">Unfortunately, I don’t know this place.
-            Please choose another location.</p>
+            <!-- Error message -->
+            <p id="error-msg" class="error ma-t30 ma-l10 ma-r10 ma-b10 visibility-hidden">
+              Unfortunately, I don’t know this place.
+              Please choose another location.</p>
 
-          <!-- Input location -->
-          <div class="fc-row ma-l10 ma-r10 ma-b10">
-            <div>
-              <label class="input-label">My trip to: </label>
-              <input id="location" type="text" list="suggestions" class="input" size="35"
-                     placeholder="enter location">
-              <datalist id="suggestions" open="open">
-                <option value="Erfurt">
-                <option value="Berlin">
-                <option value="Dubai">
-                <option value="Lagos">
-                <option value="Peking">
-                <option value="Tokyo">
-                <option value="Hong Kong">
-              </datalist>
+            <!-- Input location -->
+            <div class="fc-row ma-l10 ma-r10 ma-b10">
+              <div>
+                <label class="input-label">My trip to: </label>
+                <input id="location" type="text" list="suggestions" class="input" size="35"
+                       placeholder="enter location">
+                <datalist id="suggestions" open="open">
+                  <option value="Erfurt">
+                  <option value="Berlin">
+                  <option value="Dubai">
+                  <option value="Lagos">
+                  <option value="Peking">
+                  <option value="Tokyo">
+                  <option value="Hong Kong">
+                </datalist>
+              </div>
+            </div>
+
+            <!-- Input date -->
+            <div class="fc-row ma-l10 ma-r10 ma-b10">
+              <div>
+                <label class="input-label">Departing: </label>
+                <input id="date" type="date" class="input">
+              </div>
+            </div>
+
+            <!-- Submit button -->
+            <div class="fc-col ma-l10 ma-r10 ma-b30">
+              <input id="submit" type="button" class="submit" value="Let's go!"
+                     onclick="client.submit()">
             </div>
           </div>
-
-          <!-- Input date -->
-          <div class="fc-row ma-l10 ma-r10 ma-b10">
-            <div>
-              <label class="input-label">Departing: </label>
-              <input id="date" type="date" class="input">
-            </div>
-          </div>
-
-          <!-- Submit button -->
-          <div class="fc-col ma-l10 ma-r10 ma-b30">
-            <input id="submit" type="submit" class="submit" value="Let's go!">
-          </div>
-        </div>
+        </form>
       </div>
 
     </div>

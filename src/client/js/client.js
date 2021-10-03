@@ -18,8 +18,8 @@ class Trips {
     this.loadFromStorage()
   }
 
-  add (location, departureDate) {
-    this.createTrip(this.tripIndex, location, departureDate)
+  async add (location, departureDate) {
+    await this.createTrip(this.tripIndex, location, departureDate)
     this.nextIndex()
   }
 
@@ -83,12 +83,21 @@ class Trip {
     this.display()
   }
 
-  display () {
+  async display () {
     this.addTripPanel()
     this.displayTripHeader()
     this.displayCurrentWeather().then()
+      .catch((err) => {
+        console.error(err)
+      })
     this.displayWeatherForecast().then()
+      .catch((err) => {
+        console.error(err)
+      })
     this.displayImage().then()
+      .catch((err) => {
+        console.error(err)
+      })
   }
 
   addTripPanel () {
@@ -102,10 +111,10 @@ class Trip {
   }
 
   displayTripHeader () {
-    document.getElementById(`city-${this.tripIndex}`).innerText = `${this.location.name},`
-    document.getElementById(`city2-${this.tripIndex}`).innerText = `${this.location.name},`
-    document.getElementById(`country-${this.tripIndex}`).innerText = ` ${this.location.countryName}`
-    document.getElementById(`country2-${this.tripIndex}`).innerText = ` ${this.location.countryName}`
+    document.getElementById(`city-${this.tripIndex}`).innerText = `${this.location.name}`
+    document.getElementById(`city2-${this.tripIndex}`).innerText = `${this.location.name}`
+    document.getElementById(`country-${this.tripIndex}`).innerText = `${this.location.countryName}`
+    document.getElementById(`country2-${this.tripIndex}`).innerText = `${this.location.countryName}`
     document.getElementById(`departure-time-${this.tripIndex}`)
       .innerText = DateTime.fromISO(this.departureDate).toLocaleString(DateTime.DATE_FULL)
     const diffDays = this.daysToTrip()
@@ -292,7 +301,7 @@ document.getElementById('location').addEventListener('input', function (event) {
 const travelTrips = new Trips()
 
 // click on submit button
-document.getElementById('submit').addEventListener('click', async function (event) {
+export async function submit (event) {
   const departureDate = document.getElementById('date').value
   let location
   if (locationOptions.hasOwnProperty(document.getElementById('location').value)) {
@@ -305,7 +314,7 @@ document.getElementById('submit').addEventListener('click', async function (even
   } else {
     travelTrips.add(location, departureDate)
   }
-})
+}
 
 // Set the date in the input field to today's date.
 const currDate = DateTime.now()
@@ -341,7 +350,7 @@ function updateLocationSuggestions (jsonData) {
   document.getElementById('suggestions').replaceChildren(...newOptions)
 }
 
-function getLocationData () {
+export function getLocationData () {
   const qStr = {
     location: document.getElementById('location').value
   }
