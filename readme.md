@@ -9,15 +9,19 @@ current and forecasted weather data is presented.
 
 
 
-Offline capabilities
+Using the app:
+
+https://user-images.githubusercontent.com/28823321/135898169-a1e35526-e51b-4f67-ac0c-a7e8a10a154e.mov
+
+Responsive user interface design:
+
+https://user-images.githubusercontent.com/28823321/135898324-5df9868c-3a0f-4499-b67d-7c55b3ecbdee.mov
+
+Offline capabilities:
 
 https://user-images.githubusercontent.com/28823321/135766839-feb2fc26-0a02-490d-bd79-29c02934a64d.mov
 
 
-<p align="center">
-  <img src="doc/screenshot.png" width="400">
-</p>
-<p align="center"><em>Sample screenshot</em></p>
 
 ## Project installation
 
@@ -26,7 +30,7 @@ https://user-images.githubusercontent.com/28823321/135766839-feb2fc26-0a02-490d-
 
 - [Geonames API](https://www.geonames.org)
 - [Weatherbit API](https://www.weatherbit.io/api)
-- Pixabay API
+- [Pixabay API](https://pixabay.com/service/about/api/)
 - [Icons8](https://icons8.com/)
 - [Luxon](https://moment.github.io/luxon/index.html#/)
 - [Weather icons](http://erikflowers.github.io/weather-icons)
