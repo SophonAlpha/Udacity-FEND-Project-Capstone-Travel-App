@@ -67,13 +67,13 @@ npm run test
 To start the application on the webpack DevServer:
 
 ```shell
-npm run start-dev
+npm run dev
 ```
 
 Start the application on the local Node.js server:
 
 ```shell
-npm run node-dev
+npm run start
 ```
 
 This will start the local Node.js server and automatically open the application in your web browser.
