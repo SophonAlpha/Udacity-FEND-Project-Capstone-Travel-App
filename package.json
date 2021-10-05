@@ -1,5 +1,5 @@
 {
-  "name": "Udacity Capstone Project - Travel Planning App",
+  "name": "udacity-fend-project-capstone-travel-app",
   "sideEffects": [
     "*.scss"
   ],

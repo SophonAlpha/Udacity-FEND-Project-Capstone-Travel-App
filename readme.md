@@ -39,7 +39,21 @@ cd Udacity-FEND-Project-Capstone-Travel-App
 npm install
 ```
 
-Build the project in development mode:
+Build the project for production mode:
+
+```shell
+npm run build-prod
+```
+
+Start the application with the local Node.js server:
+
+```shell
+npm run start
+```
+
+This will start the local Node.js server and automatically open the application in your web browser.
+
+Build the project for development mode:
 
 ```shell
 npm run build-dev
@@ -56,14 +70,6 @@ To start the application on the webpack DevServer:
 ```shell
 npm run dev
 ```
-
-Start the application on the local Node.js server:
-
-```shell
-npm run start
-```
-
-This will start the local Node.js server and automatically open the application in your web browser.
 
 ## Appendix - Resources used during the project:
 
