@@ -71,6 +71,12 @@ To start the application on the webpack DevServer:
 npm run dev
 ```
 
+To start the application on the local Node.js server for development:
+
+```shell
+npm run node-dev
+```
+
 ## Appendix - Resources used during the project:
 
 - [Geonames API](https://www.geonames.org)
