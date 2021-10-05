@@ -39,19 +39,6 @@ cd Udacity-FEND-Project-Capstone-Travel-App
 npm install
 ```
 
-Before you can run the tests or the application you need to configure your own API keys for 
-Geonames, Weatherbit and Pixabay. The keys are stored in `.\src\server\.env`. The file is read by
-the Node.js server at runtime. The file has been excluded from the GitHub repository as it contains
-personal API keys.
-
-To create an `.env` file with your own API key copy the template file:
-
-```shell
-copy src\server\.env_tmpl src\server\.env
-```
-
-Open the `.env` file a text editor and replace `<ADD YOUR API KEY HERE>` with your API keys
-
 Build the project in development mode:
 
 ```shell
